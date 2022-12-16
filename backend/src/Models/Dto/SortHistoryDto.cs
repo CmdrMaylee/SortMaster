@@ -1,11 +1,7 @@
-using System.ComponentModel.DataAnnotations;
+namespace src.Models.Dto;
 
-namespace src.Models;
-
-public class SortHistory
+public class SortHistoryDto
 {
-    [Key]
-    public Guid Id { get; set; }
     public int AlgorithmId { get; set; }
     public DateTime SortStarted { get; set; }
     public DateTime SortEnded { get; set; }

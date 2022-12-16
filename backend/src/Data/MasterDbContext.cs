@@ -12,4 +12,17 @@ public class MasterDbContext : DbContext
         // options.UseSqlite("Data Source=sqlitedb.db");
         options.UseInMemoryDatabase("masterDb");
     }
+
+    /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SortHistory>().HasData
+            (new SortHistory
+            {
+                AlgorithmId = 98,
+                SortStarted = DateTime.Now.AddMinutes(-1),
+                SortEnded = DateTime.Now,
+                TimesCompared = 100,
+                ArrayAccesses = 50,
+            });
+    } */
 }

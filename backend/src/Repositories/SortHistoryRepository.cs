@@ -1,6 +1,9 @@
+using System.Linq;
+using System.Linq.Expressions;
 using src.Data;
 using src.Models;
 using src.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace src.Repositories;
 
@@ -10,21 +13,22 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public SortHistoryRepository(MasterDbContext context) => _masterDbContext = context;
 
-    public SortHistory Get(int id) => _masterDbContext.SortHistories.FirstOrDefault(x => x.SortHistoryId == id);
+    public SortHistory Get(Guid id) => _masterDbContext.SortHistories.FirstOrDefault(x => x.Id == id);
 
     public IEnumerable<SortHistory> GetByAlgorithmId(int id) => _masterDbContext.SortHistories.Where(x => x.AlgorithmId == id);
 
-    public IEnumerable<SortHistory> GetAll() => _masterDbContext.SortHistories.ToList();
+    public async Task<IEnumerable<SortHistory>> GetAllAsync(Expression<Func<SortHistory, bool>> predicate) => await _masterDbContext.SortHistories.Where(predicate).ToListAsync();
 
-    public void Add(SortHistory sortHistory)
+    public async Task<SortHistory> AddAsync(SortHistory sortHistory)
     {
         _masterDbContext.SortHistories.Add(sortHistory);
         _masterDbContext.SaveChanges();
+        return sortHistory;
     }
 
     public void Update(SortHistory replace, SortHistory replacer)
     {
-        replace.SortHistoryId = replacer.SortHistoryId;
+        replace.Id = replacer.Id;
         replace.AlgorithmId = replacer.AlgorithmId;
         replace.SortStarted = replacer.SortStarted;
         replace.SortEnded = replacer.SortEnded;
