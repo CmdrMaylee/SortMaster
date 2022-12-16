@@ -5,6 +5,7 @@ namespace src.Models;
 public class SortHistory
 {
     [Key]
+    public int SortHistoryId { get; set; }
     public int AlgorithmId { get; set; }
     public DateTime SortStarted { get; set; }
     public DateTime SortEnded { get; set; }

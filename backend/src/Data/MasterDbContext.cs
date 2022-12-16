@@ -9,6 +9,7 @@ public class MasterDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseSqlite();
+        // options.UseSqlite("Data Source=sqlitedb.db");
+        options.UseInMemoryDatabase("masterDb");
     }
 }
