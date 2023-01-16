@@ -17,7 +17,7 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public IEnumerable<SortHistory> GetByAlgorithmId(int id) => _masterDbContext.SortHistories.Where(x => x.AlgorithmId == id);
 
-    public async Task<IEnumerable<SortHistory>> GetAllAsync(Expression<Func<SortHistory, bool>> predicate) => await _masterDbContext.SortHistories.Where(predicate).ToListAsync();
+    public async Task<IEnumerable<SortHistory>> GetAllAsync() => await _masterDbContext.SortHistories.ToListAsync();
 
     public async Task<SortHistory> AddAsync(SortHistory sortHistory)
     {

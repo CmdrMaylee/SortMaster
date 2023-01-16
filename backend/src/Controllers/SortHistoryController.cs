@@ -19,7 +19,7 @@ public class SortHistoryController : ControllerBase
     [HttpGet("GetAllSortHistory")]
     public async Task<IActionResult> GetAllSortHistoryAsync()
     {
-        IEnumerable<SortHistory> result = await sortHistoryRepository.GetAllAsync(o => true);
+        IEnumerable<SortHistory> result = await sortHistoryRepository.GetAllAsync();
         return Ok(result);
     }
 

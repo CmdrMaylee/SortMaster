@@ -5,15 +5,13 @@ namespace src.Repositories.Interfaces;
 
 public interface ISortHistoryRepository
 {
-    public SortHistory Get(Guid id);
+    SortHistory Get(Guid id);
+    IEnumerable<SortHistory> GetByAlgorithmId(int id);
+    Task<IEnumerable<SortHistory>> GetAllAsync();
 
-    public IEnumerable<SortHistory> GetByAlgorithmId(int id);
+    Task<SortHistory> AddAsync(SortHistory sortHistory);
 
-    public Task<IEnumerable<SortHistory>> GetAllAsync(Expression<Func<SortHistory, bool>> predicate);
+    void Update(SortHistory replace, SortHistory replacer);
 
-    public Task<SortHistory> AddAsync(SortHistory sortHistory);
-
-    public void Update(SortHistory replace, SortHistory replacer);
-
-    public void Delete(SortHistory sortHistory);
+    void Delete(SortHistory sortHistory);
 }

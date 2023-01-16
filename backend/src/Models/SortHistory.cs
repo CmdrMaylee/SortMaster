@@ -12,4 +12,12 @@ public class SortHistory
     public int TimesCompared { get; set; }
     public int ArrayAccesses { get; set; }
     public bool WasCancelled { get; set; } = false;
+
+    public TimeSpan GetTimeSpan
+    {
+        get
+        {
+            return this.SortEnded.Subtract(this.SortStarted);
+        }
+    }
 }
