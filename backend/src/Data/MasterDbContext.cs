@@ -7,10 +7,12 @@ public class MasterDbContext : DbContext
 {
     public DbSet<SortHistory>? SortHistories { get; set; }
 
+    public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options) => Database.EnsureCreated();
+
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        // options.UseSqlite("Data Source=sqlitedb.db");
-        options.UseInMemoryDatabase("masterDb");
+        options.UseSqlite("Data Source=sqlitedb.db");
+        // options.UseInMemoryDatabase("masterDb");
     }
 
     /* protected override void OnModelCreating(ModelBuilder modelBuilder)
