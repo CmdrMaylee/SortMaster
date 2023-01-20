@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using src.Models.Dto;
@@ -24,9 +23,9 @@ public class SortHistoryController : ControllerBase
     }
 
     [HttpGet("GetSortHistoriesByAlgorithmId/{id}")]
-    public async Task<IActionResult> GetAllSortHistoriesByAlgorithmId(int id)
+    public async Task<IActionResult> GetAllSortHistoriesByAlgorithmIdAsync(int id)
     {
-        var result = sortHistoryRepository.GetByAlgorithmId(id);
+        var result = await sortHistoryRepository.GetByAlgorithmId(id);
         if (result == null) return NotFound();
         return Ok(result);
     }

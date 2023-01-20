@@ -13,16 +13,16 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public SortHistoryRepository(MasterDbContext context) => _masterDbContext = context;
 
-    public SortHistory Get(Guid id) => _masterDbContext.SortHistories.FirstOrDefault(x => x.Id == id);
+    public async Task<SortHistory> GetById(Guid id) => await _masterDbContext.SortHistories.FindAsync(id);
 
-    public IEnumerable<SortHistory> GetByAlgorithmId(int id) => _masterDbContext.SortHistories.Where(x => x.AlgorithmId == id);
+    public async Task<IEnumerable<SortHistory>> GetByAlgorithmId(int id) => await _masterDbContext.SortHistories.Where(x => x.AlgorithmId == id).ToListAsync();
 
     public async Task<IEnumerable<SortHistory>> GetAllAsync() => await _masterDbContext.SortHistories.ToListAsync();
 
     public async Task<SortHistory> AddAsync(SortHistory sortHistory)
     {
         _masterDbContext.SortHistories.Add(sortHistory);
-        _masterDbContext.SaveChanges();
+        await _masterDbContext.SaveChangesAsync();
         return sortHistory;
     }
 
