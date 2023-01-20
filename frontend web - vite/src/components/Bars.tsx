@@ -10,7 +10,13 @@ const RenderBars = (arr: number[]) => {
     return (
         <>
             {arr.map((num) => (
-                <BarsBar barIndex={num} totalBarsSize={arr.length} visualHeight={10} color="blue" />
+                <BarsBar
+                    barIndex={num}
+                    totalBarsSize={arr.length}
+                    visualHeight={10}
+                    color="blue"
+                    key={num}
+                />
             ))}
         </>
     );
