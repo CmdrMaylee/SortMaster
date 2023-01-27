@@ -1,32 +1,40 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Bars from "./components/Bars";
 
 export default function SortPage() {
-    const [arrSize, setArrSize] = useState(10);
-    let arr: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const [arrSize, setArrSize] = useState(2);
+    const [arr, setArr] = useState([1, 2]);
 
-    const updateArr = () => {
-        console.log(arr);
-
-        let newArr: number[] = [];
-
-        for (let i = 0; i < arr.length; i++) newArr.push(i + 1);
-        arr = newArr;
-        setArrSize(newArr.length);
+    const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setArrSize(Number(e.target.value));
+        console.log(Number(e.target.value));
+        console.log(arrSize);
+        updateArray();
     };
+
+    const updateArray = () => {
+        let temp: number[] = [];
+        for (let i = 0; i < arrSize; i++) temp[i] = i + 1;
+        setArr(temp);
+    };
+
+    useEffect(() => {
+        updateArray();
+    }, [arrSize]);
 
     return (
         <>
             <Bars arr={arr} visualHeight={50} />
             <input
+                id="slals"
                 type="range"
                 min={2}
                 max={10}
-                onChange={() => updateArr()}
+                onChange={handleSliderChange}
                 value={arrSize}
                 title={"arrSizeInput"}
             />
-            <p>{arr.length}</p>
+            <p>{arrSize}</p>
         </>
     );
 }
