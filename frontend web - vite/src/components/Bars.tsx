@@ -1,5 +1,5 @@
 import "../css/BarContainer.css";
-import BarsBar from "./BarsBar";
+import BarsPillar from "./BarsPillar";
 
 interface Props {
     arr: number[];
@@ -10,7 +10,7 @@ const RenderBars = (arr: number[]) => {
     return (
         <>
             {arr.map((num) => (
-                <BarsBar
+                <BarsPillar
                     barIndex={num}
                     totalBarsSize={arr.length}
                     visualHeight={10}
