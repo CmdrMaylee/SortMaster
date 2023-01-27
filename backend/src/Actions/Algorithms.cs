@@ -1,24 +1,34 @@
 using src.Models;
 
+namespace src.Actions;
+
 class Algorithms
 {
-    SortReport BubbleSort(int[] arr)
+    List<string> AlgorithmCollection = new()
     {
-        SortReport sr = new();
-        sr.AlgorithmId = 0;
+        "BubbleSort"
+    };
+
+    public List<string> GetAllAlgorithms() => AlgorithmCollection;
+
+    public SortHistory BubbleSort(int[] arr)
+    {
+        SortHistory sh = new();
+        sh.AlgorithmId = 0;
 
         bool isSorted;
+        sh.SortStarted = DateTime.Now;
         do
         {
             isSorted = true;
 
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                sr.ArrayAccesses += 2;
-                sr.TimesCompared++;
+                sh.ArrayAccesses += 2;
+                sh.TimesCompared++;
                 if (arr[i] > arr[i + 1])
                 {
-                    sr.ArrayAccesses += 3;
+                    sh.ArrayAccesses += 3;
                     int temp = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = temp;
@@ -28,8 +38,9 @@ class Algorithms
             }
 
         } while (isSorted == false);
+        sh.SortEnded = DateTime.Now;
 
-        return sr;
+        return sh;
     }
 
     /* void InsertionSort(int[] arr)
