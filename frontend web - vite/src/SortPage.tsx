@@ -7,8 +7,6 @@ export default function SortPage() {
 
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setArrSize(Number(e.target.value));
-        console.log(Number(e.target.value));
-        console.log(arrSize);
         updateArray();
     };
 
