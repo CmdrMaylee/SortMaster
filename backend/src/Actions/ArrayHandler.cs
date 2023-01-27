@@ -1,3 +1,5 @@
+namespace src.Actions;
+
 class ArrayHandler
 {
     public int[] CreateOrderedArray(int size)
@@ -33,7 +35,7 @@ class ArrayHandler
     public bool CheckSorted(int[] arr)
     {
         for (int i = 0; i < arr.Length - 1; i++)
-            if (arr[i] < arr[i + 1]) return false;
+            if (arr[i] > arr[i + 1]) return false;
 
         return true;
     }
