@@ -5,7 +5,7 @@ interface Props {
     visualHeight: number;
 }
 
-export default function BarsBar({ totalBarsSize, barIndex, color }: Props) {
+export default function BarsPillar({ totalBarsSize, barIndex, color }: Props) {
     const baseHeight = 300;
     const heightDiff = barIndex / totalBarsSize;
     const heightResult = heightDiff * baseHeight + "px";
