@@ -13,15 +13,19 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public SortHistoryRepository(MasterDbContext context) => _masterDbContext = context;
 
-    public async Task<SortHistory> GetById(Guid id) => await _masterDbContext.SortHistories.FindAsync(id);
+    public async Task<SortHistory> GetById(Guid id)
+    {
+        SortHistory result = await _masterDbContext.SortHistories!.FindAsync(id) ?? new SortHistory(new int[] { });
+        return result;
+    }
 
-    public async Task<IEnumerable<SortHistory>> GetByAlgorithmId(int id) => await _masterDbContext.SortHistories.Where(x => x.AlgorithmId == id).ToListAsync();
+    public async Task<IEnumerable<SortHistory>> GetByAlgorithmId(int id) => await _masterDbContext.SortHistories!.Where(x => x.AlgorithmId == id).ToListAsync();
 
-    public async Task<IEnumerable<SortHistory>> GetAllAsync() => await _masterDbContext.SortHistories.ToListAsync();
+    public async Task<IEnumerable<SortHistory>> GetAllAsync() => await _masterDbContext.SortHistories!.ToListAsync();
 
     public async Task<SortHistory> AddAsync(SortHistory sortHistory)
     {
-        _masterDbContext.SortHistories.Add(sortHistory);
+        _masterDbContext.SortHistories!.Add(sortHistory);
         await _masterDbContext.SaveChangesAsync();
         return sortHistory;
     }
@@ -41,7 +45,7 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public void Delete(SortHistory sortHistory)
     {
-        _masterDbContext.SortHistories.Remove(sortHistory);
+        _masterDbContext.SortHistories!.Remove(sortHistory);
         _masterDbContext.SaveChanges();
     }
 }
