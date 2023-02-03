@@ -6,14 +6,14 @@ interface Props {
     visualHeight: number;
 }
 
-const RenderBars = (arr: number[]) => {
+const RenderBars = (arr: number[], visualHeight: number) => {
     return (
         <>
             {arr.map((num) => (
                 <BarsPillar
                     barIndex={num}
                     totalBarsSize={arr.length}
-                    visualHeight={10}
+                    visualHeight={visualHeight}
                     color="blue"
                     key={num}
                 />
@@ -22,6 +22,6 @@ const RenderBars = (arr: number[]) => {
     );
 };
 
-export default function Bars({ arr }: Props) {
-    return <div className="barContainer">{RenderBars(arr)}</div>;
+export default function Bars({ arr, visualHeight }: Props) {
+    return <div className="barContainer">{RenderBars(arr, visualHeight)}</div>;
 }
