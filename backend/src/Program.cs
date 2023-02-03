@@ -31,7 +31,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    await MasterDbSeedStuff.SeedAsync(services);
+    // await MasterDbSeedStuff.SeedAsync(services);
 }
 
 
