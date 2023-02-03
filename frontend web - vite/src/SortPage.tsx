@@ -36,8 +36,8 @@ export default function SortPage() {
     return (
         <>
             <select name="Algorithms">
-                {algorithms.map((x) => (
-                    <option>{x}</option>
+                {algorithms.map((x, y) => (
+                    <option key={y}>{x}</option>
                 ))}
             </select>
             <Bars arr={arr} visualHeight={5} />
