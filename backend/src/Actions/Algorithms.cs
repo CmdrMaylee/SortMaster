@@ -13,22 +13,22 @@ class Algorithms
 
     public SortHistory BubbleSort(int[] arr)
     {
-        SortHistory sh = new();
-        sh.AlgorithmId = 0;
-
         bool isSorted;
-        sh.SortStarted = DateTime.Now;
+        long timesCompared = 0;
+        long arrayAccesses = 0;
+        long sortingAttempts = 0;
+        DateTime timeStart = DateTime.Now;
         do
         {
             isSorted = true;
 
             for (int i = 0; i < arr.Length - 1; i++)
             {
-                sh.ArrayAccesses += 2;
-                sh.TimesCompared++;
+                arrayAccesses += 2;
+                timesCompared++;
                 if (arr[i] > arr[i + 1])
                 {
-                    sh.ArrayAccesses += 3;
+                    arrayAccesses += 3;
                     int temp = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = temp;
@@ -38,7 +38,16 @@ class Algorithms
             }
 
         } while (isSorted == false);
-        sh.SortEnded = DateTime.Now;
+        DateTime timeStop = DateTime.Now;
+
+        SortHistory sh = new(arr);
+
+        sh.AlgorithmId = 0;
+        sh.SortStarted = timeStart;
+        sh.SortEnded = timeStop;
+        sh.TimesCompared = timesCompared;
+        sh.ArrayAccesses = arrayAccesses;
+        sh.SortingAttempts = sortingAttempts;
 
         return sh;
     }
