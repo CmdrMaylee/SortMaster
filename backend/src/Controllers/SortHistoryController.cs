@@ -10,6 +10,7 @@ namespace src.Controllers;
 public class SortHistoryController : ControllerBase
 {
     private readonly ISortHistoryRepository sortHistoryRepository;
+
     public SortHistoryController(ISortHistoryRepository sortHistoryRepository)
     {
         this.sortHistoryRepository = sortHistoryRepository;

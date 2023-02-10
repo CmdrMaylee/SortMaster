@@ -15,7 +15,7 @@ export default function BarsPillar({ totalBarsSize, barIndex, color, visualHeigh
             style={{
                 height: heightResult,
             }}
-            className={`bg-blue-600 grow basis-0 m-[1px]`}
+            className={`bg-blue-600 rounded-xl grow basis-0 m-[1px]`}
         ></div>
     );
 }

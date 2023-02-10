@@ -1,4 +1,3 @@
-import "../css/BarContainer.css";
 import BarsPillar from "./BarsPillar";
 
 interface Props {
@@ -23,5 +22,5 @@ const RenderBars = (arr: number[], visualHeight: number) => {
 };
 
 export default function Bars({ arr, visualHeight }: Props) {
-    return <div className="barContainer">{RenderBars(arr, visualHeight)}</div>;
+    return <div className="flex items-end">{RenderBars(arr, visualHeight)}</div>;
 }
