@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using src.Actions;
 
 namespace src.Models;
@@ -7,6 +8,7 @@ public class SortHistory
 {
     [Key]
     public Guid Id { get; set; }
+    [ForeignKey("")]
     public int AlgorithmId { get; set; }
     public DateTime SortStarted { get; set; }
     public DateTime SortEnded { get; set; }

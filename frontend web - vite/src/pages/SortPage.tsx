@@ -35,21 +35,39 @@ export default function SortPage() {
 
     return (
         <>
-            <Bars arr={arr} visualHeight={5} />
-            <div className="flex ">
-                <input
-                    type="number"
-                    min={2}
-                    max={10000}
-                    onChange={handleSliderChange}
-                    value={arrSize}
-                    className="text-4xl bg-gray-400"
-                />
-                <select name="Algorithms" className="w-full bg-gray-200 text-5xl rounded-2xl">
-                    {algorithms.map((x, y) => (
-                        <option key={y}>{x}</option>
-                    ))}
-                </select>
+            <div className="bg-slate-600 p-6 mt-6 rounded-xl">
+                <Bars arr={arr} visualHeight={5} />
+                <div className="flex mt-6<">
+                    <p></p>
+                    <input
+                        type="number"
+                        min={2}
+                        max={100000}
+                        onChange={handleSliderChange}
+                        value={arrSize}
+                        className="text-4xl bg-gray-400 text-center rounded-xl"
+                    />
+                    <select name="Algorithms" className="w-full bg-slate-800 text-5xl rounded-2xl ">
+                        {algorithms.map((x, i) => (
+                            <option key={i}>{x}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="w-full flex items-center justify-center">
+                    <button
+                        type="button"
+                        className="bg-slate-700 border-b-4 border-green-500 px-6 py-1 m-4 rounded text-3xl text-green-300 drop-shadow-md hover:border-x-4"
+                    >
+                        <p>Sort!</p>
+                    </button>
+
+                    <button
+                        type="button"
+                        className="bg-slate-700 border-b-4 border-yellow-500 px-6 py-1 m-4 rounded text-3xl text-yellow-200 drop-shadow-md hover:border-x-4"
+                    >
+                        <p>Check</p>
+                    </button>
+                </div>
             </div>
         </>
     );
