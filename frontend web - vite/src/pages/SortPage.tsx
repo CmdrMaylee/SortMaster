@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Bars from "./components/Bars";
+import Bars from "../components/Bars";
 
 export default function SortPage() {
     const [arrSize, setArrSize] = useState(2);
@@ -35,22 +35,21 @@ export default function SortPage() {
 
     return (
         <>
-            <select name="Algorithms">
-                {algorithms.map((x, y) => (
-                    <option key={y}>{x}</option>
-                ))}
-            </select>
             <Bars arr={arr} visualHeight={5} />
-            <div>
+            <div className="flex ">
                 <input
-                    type="range"
+                    type="number"
                     min={2}
-                    max={10}
+                    max={10000}
                     onChange={handleSliderChange}
                     value={arrSize}
-                    title={"arrSizeInput"}
+                    className="text-4xl bg-gray-400"
                 />
-                <p>{arrSize}</p>
+                <select name="Algorithms" className="w-full bg-gray-200 text-5xl rounded-2xl">
+                    {algorithms.map((x, y) => (
+                        <option key={y}>{x}</option>
+                    ))}
+                </select>
             </div>
         </>
     );

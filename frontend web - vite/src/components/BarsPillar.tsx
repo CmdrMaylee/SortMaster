@@ -9,14 +9,13 @@ export default function BarsPillar({ totalBarsSize, barIndex, color, visualHeigh
     const baseHeight = 30;
     const heightDiff = barIndex / totalBarsSize;
     const heightResult = heightDiff * baseHeight * visualHeight;
-    const cssBgColor = "bg-" + color + "-500";
 
     return (
         <div
             style={{
                 height: heightResult,
             }}
-            className={`${cssBgColor} grow basis-0 m-3`}
+            className={`bg-blue-600 grow basis-0 m-[1px]`}
         ></div>
     );
 }
