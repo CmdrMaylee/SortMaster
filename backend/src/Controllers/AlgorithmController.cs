@@ -20,7 +20,7 @@ public class AlgorithmController : ControllerBase
     [HttpGet("GetAllSortingAlgorithms")]
     public IActionResult GetAllAlgorithmsAsync()
     {
-        var result = sorts.GetAllAlgorithms();
+        var result = algorithmRepository.GetAllAsync();
         return Ok(result);
     }
 }
