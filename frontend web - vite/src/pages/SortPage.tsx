@@ -5,7 +5,8 @@ export default function SortPage() {
     const [arrSize, setArrSize] = useState(2);
     const [arr, setArr] = useState([1, 2]);
     const [algorithms, setAlgorithms] = useState<string[]>([]);
-    const [disableSortButton, setDisableSortButton] = useState(true);
+    const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>();
+    const [isSortButtonValid, setIsSortButtonValid] = useState(true);
 
     let randomizeArray = true;
 
@@ -13,15 +14,27 @@ export default function SortPage() {
         fetch("http://localhost:5160/api/Sort/GetAllSortingAlgorithms")
             .then((response) => response.json())
             .then((json: string) => {
-                setAlgorithms(["Choose Algorithm", json]);
+                setAlgorithms([...json]);
             });
     };
 
-    const PerformSort = () => {};
+    const PerformSort = () => {
+        console.log("Start it");
+        const rawResponse = fetch(
+            `http://localhost:5160/api/Sort/PerformSort?algorithm=${selectedAlgorithm}&arrSize=${arrSize}`,
+            {
+                method: "POST",
+            }
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let num = Number(e.target.value);
-        if (num < 2) num = 2;
+        if (num < 1) num = 1;
 
         randomizeArray = true;
 
@@ -31,8 +44,19 @@ export default function SortPage() {
 
     const handleAlgorithmChange = (e: { target: { options: { selectedIndex: any } } }) => {
         const selectedOption = e.target.options.selectedIndex;
-        if (selectedOption == 0) setDisableSortButton(true);
-        else setDisableSortButton(false);
+        setSelectedAlgorithm(algorithms[selectedOption]);
+    };
+
+    const validateSortButton = () => {
+        console.log(selectedAlgorithm);
+        console.log(arrSize);
+        if (
+            !algorithms.includes(`${selectedAlgorithm}`) ||
+            arrSize < 2 ||
+            selectedAlgorithm == undefined
+        )
+            setIsSortButtonValid(false);
+        else setIsSortButtonValid(true);
     };
 
     const updateArray = () => {
@@ -44,6 +68,10 @@ export default function SortPage() {
     useEffect(() => {
         updateArray();
     }, [arrSize]);
+
+    useEffect(() => {
+        validateSortButton();
+    }, [selectedAlgorithm, arrSize]);
 
     useEffect(() => {
         GetAlgorithms();
@@ -60,7 +88,7 @@ export default function SortPage() {
                     <div className="flex items-center">
                         <input
                             type="number"
-                            min={2}
+                            min={1}
                             max={100000}
                             onChange={handleInputChange}
                             value={arrSize}
@@ -72,6 +100,7 @@ export default function SortPage() {
                         onChange={handleAlgorithmChange}
                         className="w-full rounded-2xl md:ml-10 mt-6 bg-white md:mt-0 dark:bg-slate-800"
                     >
+                        <option>Choose Algorithm</option>
                         {algorithms.map((x, i) => (
                             <option key={i}>{x}</option>
                         ))}
@@ -80,22 +109,23 @@ export default function SortPage() {
 
                 {/* Sort buttons */}
                 <div className="w-full flex items-center justify-center">
-                    {disableSortButton && (
+                    {isSortButtonValid && (
                         <div>
                             <button
                                 type="button"
                                 className="bg-slate-700 border-b-4 border-slate-500 px-6 py-1 m-4 rounded text-3xl drop-shadow-md opacity-30"
-                                disabled={disableSortButton}
+                                disabled={isSortButtonValid}
                             >
                                 <p>Sort!</p>
                             </button>
                         </div>
                     )}
-                    {!disableSortButton && (
+                    {!isSortButtonValid && (
                         <button
                             type="button"
+                            onClick={PerformSort}
                             className="bg-slate-700 border-b-4 border-green-500 px-6 py-1 m-4 rounded text-3xl text-green-300 drop-shadow-md hover:border-x-4"
-                            disabled={disableSortButton}
+                            disabled={isSortButtonValid}
                         >
                             <p>Sort!</p>
                         </button>
