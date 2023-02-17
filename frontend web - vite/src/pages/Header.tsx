@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Header() {
-    const themeOptions = ["Automagic", "Brightula", "Radula"];
+    const themeOptions = ["Automagic", "Brightenstein", "Radula"];
 
     let localTheme: string = localStorage.theme;
 
@@ -30,7 +30,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="rounded-b-2xl border-b-4 border-green-500 bg-slate-200 dark:bg-slate-600">
+            <div className="rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
                 <div className="flex justify-between mx-4">
                     <div id="themeSection">
                         <p>Theme</p>
@@ -39,17 +39,19 @@ export default function Header() {
                             onChange={(event) => {
                                 onThemeChange(event.target.value);
                             }}
-                            className="bg-slate-300 rounded dark:bg-slate-800"
+                            className="bg-white rounded dark:bg-slate-800"
                         >
                             {themeOptions.map((x, i) => (
                                 <option key={i}>{x}</option>
                             ))}
                         </select>
                     </div>
-                    <p className="text-6xl" style={{ fontFamily: "verdana" }}>
-                        SortMaster
-                    </p>
-                    <p>By McJeffrey</p>
+                    <div className="flex justify-center items-center">
+                        <p className="text-2xl md:text-6xl" style={{ fontFamily: "verdana" }}>
+                            SortMaster
+                        </p>
+                    </div>
+                    <p className="my-auto">By McJeffrey</p>
                 </div>
             </div>
         </>
