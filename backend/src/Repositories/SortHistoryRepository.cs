@@ -15,7 +15,7 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public async Task<SortHistory> GetById(Guid id)
     {
-        SortHistory result = await _masterDbContext.SortHistories!.FindAsync(id) ?? new SortHistory(new int[] { });
+        SortHistory result = await _masterDbContext.SortHistories!.FindAsync(id) ?? new SortHistory(/* new int[] { } */);
         return result;
     }
 
@@ -25,7 +25,7 @@ public class SortHistoryRepository : ISortHistoryRepository
 
     public async Task<SortHistory> AddAsync(SortHistory sortHistory)
     {
-        _masterDbContext.SortHistories!.Add(sortHistory);
+        await _masterDbContext.SortHistories!.AddAsync(sortHistory);
         await _masterDbContext.SaveChangesAsync();
         return sortHistory;
     }

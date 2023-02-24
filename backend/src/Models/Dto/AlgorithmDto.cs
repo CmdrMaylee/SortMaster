@@ -1,11 +1,7 @@
-using System.ComponentModel.DataAnnotations;
+namespace src.Models.Dto;
 
-namespace src.Models;
-
-public class Algorithm
+public class AlgorithmDto
 {
-    [Key]
-    public int AlgorithmId { get; set; }
     public string AlgorithmName { get; set; }
     public string BigONotationBest { get; set; }
     public string BigONotationWorst { get; set; }

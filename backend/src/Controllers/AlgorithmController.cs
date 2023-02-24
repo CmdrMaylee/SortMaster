@@ -3,6 +3,7 @@ using System.Text.Json;
 using src.Models;
 using src.Repositories;
 using src.Repositories.Interfaces;
+using src.Models.Dto;
 
 namespace src.Controllers;
 
@@ -18,9 +19,37 @@ public class AlgorithmController : ControllerBase
     }
 
     [HttpGet("GetAllSortingAlgorithms")]
-    public IActionResult GetAllAlgorithmsAsync()
+    public async Task<IActionResult> GetAllAlgorithmsAsync()
     {
-        var result = algorithmRepository.GetAllAsync();
+        IEnumerable<Algorithm> result = await algorithmRepository.GetAllAsync();
         return Ok(result);
+    }
+
+    [HttpPost("InsertAlgorithm")]
+    public async Task<IActionResult> InsertAlgorithmAsync([FromBody] AlgorithmDto algorithmDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        try
+        {
+            Algorithm algorithm = new Algorithm()
+            {
+                AlgorithmName = algorithmDto.AlgorithmName,
+                BigONotationBest = algorithmDto.BigONotationBest,
+                BigONotationWorst = algorithmDto.BigONotationWorst,
+                BigONotationAverage = algorithmDto.BigONotationAverage,
+                DescriptionText = algorithmDto.DescriptionText,
+                PerformanceText = algorithmDto.PerformanceText
+            };
+
+            await algorithmRepository.InsertAlgorithm(algorithm);
+
+            return Ok(algorithm);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
 }

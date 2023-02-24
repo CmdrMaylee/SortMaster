@@ -6,7 +6,7 @@ namespace src.Data;
 public class MasterDbContext : DbContext
 {
     public DbSet<SortHistory>? SortHistories { get; set; }
-    public DbSet<Algorithm>? AlgorithmRepo { get; set; }
+    public DbSet<Algorithm>? Algorithms { get; set; }
 
     public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options) => Database.EnsureCreated();
 

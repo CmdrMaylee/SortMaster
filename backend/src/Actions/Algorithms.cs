@@ -40,7 +40,7 @@ class Algorithms
         } while (isSorted == false);
         DateTime timeStop = DateTime.Now;
 
-        SortHistory sh = new(arr);
+        SortHistory sh = new(/* arr */);
 
         sh.AlgorithmId = 0;
         sh.SortStarted = timeStart;

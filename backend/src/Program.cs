@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<MasterDbContext>();
 builder.Services.AddScoped<ISortHistoryRepository, SortHistoryRepository>();
+builder.Services.AddScoped<IAlgorithmRepository, AlgorithmRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -39,7 +39,7 @@ public class SortHistoryController : ControllerBase
 
         try
         {
-            SortHistory sortHistory = new SortHistory(sortHistoryDto.Array) // TODO Here it is. Should it require array as a parameter?
+            SortHistory sortHistory = new SortHistory(/* sortHistoryDto.Array */) // TODO Here it is. Should it require array as a parameter?
             {
                 AlgorithmId = sortHistoryDto.AlgorithmId,
                 SortStarted = sortHistoryDto.SortStarted,

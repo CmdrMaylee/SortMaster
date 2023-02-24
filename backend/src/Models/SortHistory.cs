@@ -26,7 +26,7 @@ public class SortHistory
         }
     }
 
-    public SortHistory(int[] arr)
+    /* public SortHistory(int[] arr)
     {
         if (arr.Length < 1) return;
 
@@ -39,5 +39,5 @@ public class SortHistory
             if (isCorrectlySorted)
                 this.WasCorrectlySorted = true;
         }
-    }
+    } */
 }

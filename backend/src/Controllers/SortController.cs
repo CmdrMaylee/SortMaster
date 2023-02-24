@@ -12,12 +12,12 @@ public class SortController : ControllerBase
     Algorithms sorts = new();
     ArrayHandler arrHandlr = new();
 
-    [HttpGet("GetAllSortingAlgorithms")]
+    /* [HttpGet("GetAllSortingAlgorithms")]
     public IActionResult GetAllSortingAlgorithmsAsync()
     {
         var result = sorts.GetAllAlgorithms();
         return Ok(result);
-    }
+    } */
 
     [HttpPost("PerformSort")]
     public IActionResult PerformSortAsync(string algorithm, int arrSize)
