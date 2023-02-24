@@ -33,7 +33,7 @@ export default function Header() {
             <div className="rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
                 <div className="flex justify-between mx-4">
                     <div id="themeSection">
-                        <p>Theme</p>
+                        <p>Colour Scheme</p>
                         <select
                             value={currentTheme}
                             onChange={(event) => {
