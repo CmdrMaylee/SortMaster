@@ -6,7 +6,8 @@ class Algorithms
 {
     List<string> AlgorithmCollection = new()
     {
-        "BubbleSort"
+        "BubbleSort",
+        "InsertionSort"
     };
 
     public List<string> GetAllAlgorithms() => AlgorithmCollection;
@@ -52,36 +53,61 @@ class Algorithms
         return sh;
     }
 
-    /* void InsertionSort(int[] arr)
+    public SortHistory InsertionSort(int[] arr)
     {
-        SortReport sr = new();
-        sr.AlgorithmId = 1;
+        bool isSorted;
+        long timesCompared = 0;
+        long arrayAccesses = 0;
+        long sortingAttempts = 0;
+        DateTime timeStart = DateTime.Now;
 
-        bool isSorted = true;
         bool settingOutOfPlace = false;
         int checkpoint = 0;
 
         do
         {
-            sr.ArrayAccesses += 2;
+            isSorted = true;
+
+            arrayAccesses += 2;
             for (int i = 0; i < arr.Length; i++)
             {
-                sr.TimesCompared++;
+                timesCompared++;
+
                 if (arr[i] > arr[i + 1])
                 {
-                    sr.ArrayAccesses += 3;
+                    arrayAccesses += 3;
                     int temp = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = temp;
                     isSorted = false;
-                    settingOutOfPlace = true;
+                    if (checkpoint == 0)
+                    {
+                        settingOutOfPlace = true;
+                        checkpoint = i - 1;
+                    }
+
+                    if (i != 0)
+                        i -= 2;
                 }
                 else if (settingOutOfPlace)
                 {
-                    i = checkpoint - 1;
                     settingOutOfPlace = false;
+                    i = checkpoint;
                 }
             }
         } while (isSorted == false);
-    } */
+        DateTime timeStop = DateTime.Now;
+
+        SortHistory sh = new(/* arr */)
+        {
+            AlgorithmId = 0,
+            SortStarted = timeStart,
+            SortEnded = timeStop,
+            TimesCompared = timesCompared,
+            ArrayAccesses = arrayAccesses,
+            SortingAttempts = sortingAttempts
+        };
+
+        return sh;
+    }
 }
