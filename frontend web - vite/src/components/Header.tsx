@@ -47,8 +47,13 @@ export default function Header() {
                         </select>
                     </div>
                     <div className="flex justify-center items-center">
-                        <p className="text-2xl md:text-6xl" style={{ fontFamily: "verdana" }}>
+                        <p className="text-2xl lg:text-6xl" style={{ fontFamily: "verdana" }}>
                             SortMaster
+                        </p>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <p className="text-2xl xl:text-6xl" style={{ fontFamily: "verdana" }}>
+                            ソート マスター
                         </p>
                     </div>
                     <p className="my-auto">By McJeffrey</p>
