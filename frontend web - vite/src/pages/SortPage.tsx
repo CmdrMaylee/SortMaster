@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AlgorithmResponse, ApiFetchAlgorithms, ApiPerformSort } from "../ApiRequests";
 import Bars from "../components/Bars";
 import SortInfo from "../components/SortInfo";
+import SortReport, { SortReportModel } from "../components/SortReport";
 
 export default function SortPage() {
     const [arr, setArr] = useState([1, 2]);
@@ -9,6 +10,7 @@ export default function SortPage() {
     const [algorithms, setAlgorithms] = useState<AlgorithmResponse[]>([]);
     const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmResponse>();
     const [isSortButtonValid, setIsSortButtonValid] = useState(true);
+    const [currentSortReport, setCurrentSortReport] = useState<SortReportModel>();
 
     let randomizeArray = true;
 
@@ -19,6 +21,7 @@ export default function SortPage() {
 
     async function PerformSort() {
         let result = await ApiPerformSort(selectedAlgorithm!.algorithmName, arrSize);
+        setCurrentSortReport(result);
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,6 +124,9 @@ export default function SortPage() {
                     )}
                 </div>
             </div>
+
+            {/* Sort Report | CONDITIONAL */}
+            {currentSortReport && <SortReport report={currentSortReport}></SortReport>}
 
             {/* Sort info */}
             {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}

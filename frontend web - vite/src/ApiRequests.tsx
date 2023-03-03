@@ -23,5 +23,5 @@ export async function ApiPerformSort(selectedAlgorithm: string, arrSize: number)
         }
     );
     let parsed = await response.json();
-    console.log(parsed);
+    return parsed;
 }

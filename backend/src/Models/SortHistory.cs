@@ -10,11 +10,12 @@ public class SortHistory
     public Guid Id { get; set; }
     [ForeignKey("")]
     public int AlgorithmId { get; set; }
+    public string AlgorithmName { get; set; }
     public DateTime SortStarted { get; set; }
     public DateTime SortEnded { get; set; }
     public long TimesCompared { get; set; }
     public long ArrayAccesses { get; set; }
-    public long SortingAttempts { get; set; }
+    public long? SortingAttempts { get; set; }
     public bool WasCancelled { get; set; } = false;
     public bool WasCorrectlySorted { get; set; } = false;
 
@@ -23,6 +24,14 @@ public class SortHistory
         get
         {
             return this.SortEnded.Subtract(this.SortStarted);
+        }
+    }
+
+    public string GetFormatedSortEnd
+    {
+        get
+        {
+            return this.SortEnded.ToString("H:mm:ss");
         }
     }
 
