@@ -9,25 +9,16 @@ namespace src.Controllers;
 [Route("api/[controller]")]
 public class SortController : ControllerBase
 {
-    Algorithms sorts = new();
-    ArrayHandler arrHandlr = new();
-
-    /* [HttpGet("GetAllSortingAlgorithms")]
-    public IActionResult GetAllSortingAlgorithmsAsync()
-    {
-        var result = sorts.GetAllAlgorithms();
-        return Ok(result);
-    } */
+    Algorithms algorithmCore = new();
 
     [HttpPost("PerformSort")]
-    public IActionResult PerformSortAsync(string algorithm, int arrSize)
+    public IActionResult PerformSort(string algorithm, int arrSize)
     {
-        var doesAlgorithmExist = sorts.GetAllAlgorithms().Contains(algorithm);
+        var result = algorithmCore.PerformSort(algorithm, arrSize);
 
-        if (!doesAlgorithmExist) return NotFound();
+        if (result == null)
+            return BadRequest("Algorithm not found");
 
-        var scrambledArr = arrHandlr.ScrambleArray(arrHandlr.CreateOrderedArray(arrSize));
-        SortHistory result = sorts.BubbleSort(scrambledArr);
         string resultJson = JsonSerializer.Serialize(result);
 
         return Ok(resultJson);
