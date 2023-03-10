@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AlgorithmResponse, ApiFetchAlgorithms, ApiPerformSort } from "../ApiRequests";
 import Bars from "../components/Bars";
 import SortInfo from "../components/SortInfo";
-import SortReport, { SortReportModel } from "../components/SortReport";
+import SortReport, { SortReportViewModel } from "../components/SortReport";
 
 export default function SortPage() {
     const [arr, setArr] = useState([1, 2]);
@@ -10,7 +10,7 @@ export default function SortPage() {
     const [algorithms, setAlgorithms] = useState<AlgorithmResponse[]>([]);
     const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmResponse>();
     const [isSortButtonValid, setIsSortButtonValid] = useState(true);
-    const [currentSortReport, setCurrentSortReport] = useState<SortReportModel>();
+    const [currentSortReport, setCurrentSortReport] = useState<SortReportViewModel>();
 
     let randomizeArray = true;
 
@@ -26,7 +26,7 @@ export default function SortPage() {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let num = Number(e.target.value);
-        if (num < 1) num = 1;
+        if (num < 0) num = 0;
 
         randomizeArray = true;
 
@@ -80,7 +80,7 @@ export default function SortPage() {
                     <div className="flex items-center">
                         <input
                             type="number"
-                            min={1}
+                            min={0}
                             max={100000}
                             onChange={handleInputChange}
                             value={arrSize}

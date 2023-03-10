@@ -6,7 +6,7 @@ using src.Repositories.Interfaces;
 namespace src.Controllers;
 
 [ApiController]
-[Route("api/history/[controller]")]
+[Route("api/[controller]")]
 public class SortHistoryController : ControllerBase
 {
     private readonly ISortHistoryRepository sortHistoryRepository;
@@ -55,7 +55,7 @@ public class SortHistoryController : ControllerBase
         }
         catch (Exception e)
         {
-            return StatusCode(500, e.Message);
+            return StatusCode(500, e.InnerException);
         }
     }
 }

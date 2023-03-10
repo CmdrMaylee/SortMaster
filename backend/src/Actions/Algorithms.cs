@@ -13,7 +13,7 @@ class Algorithms
         "BogoSort"
     };
 
-    public List<string> GetAllAlgorithms() => AlgorithmCollection;
+    // public List<string> GetAllAlgorithms() => AlgorithmCollection;
 
     public SortHistory? PerformSort(string algorithm, int arrSize)
     {
@@ -89,12 +89,12 @@ class Algorithms
         {
             isSorted = true;
 
-            for (int i = 0; i < arr.Length - 1; i++)
+            for (int i = 1; i < arr.Length - 1; i++)
             {
                 timesCompared++;
 
                 arrayAccesses += 2;
-                if (arr[i] > arr[i + 1])
+                if (arr[i] < arr[i - 1])
                 {
                     isSorted = false;
                     checkpoint = i - 1;
@@ -105,10 +105,12 @@ class Algorithms
                         arrayAccesses += 3;
                         timesCompared++;
                         int swap = arr[tempIndex];
-                        arr[tempIndex] = arr[tempIndex + 1];
-                        arr[tempIndex + 1] = swap;
+                        arr[tempIndex] = arr[tempIndex - 1];
+                        arr[tempIndex - 1] = swap;
 
-                    } while (arr[i] > arr[i + 1]);
+                        if (tempIndex == 1) break;
+                        tempIndex--;
+                    } while (arr[tempIndex - 1] > arr[tempIndex]);
 
                 }
                 else if (i == arr.Length)

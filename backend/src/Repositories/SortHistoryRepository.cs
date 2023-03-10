@@ -4,6 +4,7 @@ using src.Data;
 using src.Models;
 using src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using src.Models.Dto;
 
 namespace src.Repositories;
 
@@ -19,7 +20,10 @@ public class SortHistoryRepository : ISortHistoryRepository
         return result;
     }
 
-    public async Task<IEnumerable<SortHistory>> GetByAlgorithmId(int id) => await _masterDbContext.SortHistories!.Where(x => x.AlgorithmId == id).ToListAsync();
+    public async Task<IEnumerable<SortHistory>> GetByAlgorithmId(int id)
+    {
+        return await _masterDbContext.SortHistories!.Where(x => x.AlgorithmId == id).ToListAsync();
+    }
 
     public async Task<IEnumerable<SortHistory>> GetAllAsync() => await _masterDbContext.SortHistories!.ToListAsync();
 
