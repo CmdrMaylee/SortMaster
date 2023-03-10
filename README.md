@@ -2,6 +2,14 @@
 
 A web/mobile app that teaches about sorting algorithms and present it in an edutainment way, allowing the user to read about different kinds algorithms, the glossary of terms surrounding sorting, and test algorithms on their device to see how they work
 
+## How to run
+
+The program is separated into 3 projects: Backend, Frontend Web & Frontend Mobile.
+
+Backend: Start with opening a terminal in "backend\src\" and running "dotnet run" to run a local instance of the backend(database uses SqlLite)
+Frontend Web: Open a terminal window in "frontend web - vite\src\" and run the command "npm run dev" to initiate a local version of the web page.
+Frontend Mobile: TBA.
+
 ## Essentials
 
 The requirements that puts the foundation into the program over flavour is gonna be a way to initiate sorting attempts, see the result of an attempt, save a history of attempts and allow the user to see the full log of previous sortings(hence, the backend needs to be in place as well).
