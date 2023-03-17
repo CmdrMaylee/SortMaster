@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { ApiGetSortReportsByAlgorithmId, ApiSendSortReport } from "../ApiRequests";
 
-export interface SortReportViewModel {
+/* export interface SortReportViewModel {
     AlgorithmId: number;
     AlgorithmName: string;
     ArrayAccesses: number;
@@ -10,7 +11,7 @@ export interface SortReportViewModel {
     GetFormatedSortEnd: string;
     SortingAttempts: number;
     TimesCompared: number;
-}
+} */
 
 export interface SortReportApiModel {
     AlgorithmId: number;
@@ -18,21 +19,26 @@ export interface SortReportApiModel {
     SortEnded: Date;
     TimesCompared: number;
     ArrayAccesses: number;
+    SortingAttempts: number;
     WasCancelled: boolean;
+    GetFormatedSortEnd: string;
+    GetTimeSpan: string;
 }
 
 interface Props {
-    report: SortReportViewModel;
+    report: SortReportApiModel;
+    algorithmName: string | undefined;
 }
 
-export default function SortReport({ report }: Props) {
+export default function SortReport({ report, algorithmName }: Props) {
     async function SendReport() {
-        const send: SortReportApiModel = {
+        const send = {
             AlgorithmId: report.AlgorithmId,
             SortStarted: report.SortStarted,
             SortEnded: report.SortEnded,
             TimesCompared: report.TimesCompared,
             ArrayAccesses: report.ArrayAccesses,
+            SortingAttempts: report.SortingAttempts,
             WasCancelled: false,
         };
         let result = await ApiSendSortReport(send);
@@ -54,7 +60,7 @@ export default function SortReport({ report }: Props) {
                     <h2 className="text-3xl font-bold">Successfull sort!</h2>
                     <div className="mt-6 flex mx-auto items-center flex-col">
                         <div>
-                            <p>Algorithm: {report.AlgorithmName}</p>
+                            <p>Algorithm: {algorithmName}</p>
                             <p>Array access count: {report.ArrayAccesses}</p>
                             <p>Comparisons: {report.TimesCompared}</p>
                             <p>Total time to sort: {report.GetTimeSpan}</p>

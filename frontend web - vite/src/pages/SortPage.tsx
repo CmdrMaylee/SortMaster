@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import { AlgorithmResponse, ApiFetchAlgorithms, ApiPerformSort } from "../ApiRequests";
 import Bars from "../components/Bars";
 import SortInfo from "../components/SortInfo";
-import SortReport, { SortReportViewModel } from "../components/SortReport";
+import SortReport, { SortReportApiModel } from "../components/SortReport";
 
 export default function SortPage() {
+    /* STATES */
+
     const [arr, setArr] = useState([1, 2]);
     const [arrSize, setArrSize] = useState(arr.length);
     const [algorithms, setAlgorithms] = useState<AlgorithmResponse[]>([]);
     const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmResponse>();
     const [isSortButtonValid, setIsSortButtonValid] = useState(true);
-    const [currentSortReport, setCurrentSortReport] = useState<SortReportViewModel>();
+    const [currentSortReport, setCurrentSortReport] = useState<SortReportApiModel>();
 
     let randomizeArray = true;
+
+    /* API METHODS */
 
     async function GetAlgorithms() {
         let result = await ApiFetchAlgorithms();
@@ -23,6 +27,8 @@ export default function SortPage() {
         let result = await ApiPerformSort(selectedAlgorithm!.algorithmName, arrSize);
         setCurrentSortReport(result);
     }
+
+    /* HANDLE ELEMENT-CHANGE METHODS */
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let num = Number(e.target.value);
@@ -57,6 +63,8 @@ export default function SortPage() {
         setArr(temp);
     };
 
+    /* USEEFFECTS */
+
     useEffect(() => {
         updateArray();
     }, [arrSize]);
@@ -71,7 +79,7 @@ export default function SortPage() {
 
     return (
         <>
-            <div className="p-6 mt-6 rounded-xl bg-blue-300 text-2xl md:text-5xl dark:bg-slate-600">
+            <div className="p-6 mt-6 rounded-xl bg-blue-300 text-2xl lg:text-5xl dark:bg-slate-600">
                 {/* Bars */}
                 <Bars arr={arr} visualHeight={5} randomize={true} />
 
@@ -126,7 +134,12 @@ export default function SortPage() {
             </div>
 
             {/* Sort Report | CONDITIONAL */}
-            {currentSortReport && <SortReport report={currentSortReport}></SortReport>}
+            {currentSortReport && (
+                <SortReport
+                    report={currentSortReport}
+                    algorithmName={selectedAlgorithm?.algorithmName}
+                ></SortReport>
+            )}
 
             {/* Sort info */}
             {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}

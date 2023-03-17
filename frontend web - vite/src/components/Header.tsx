@@ -31,7 +31,7 @@ export default function Header() {
     return (
         <>
             <div className="rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
-                <div className="flex justify-between mx-4">
+                <div className="flex flex-wrap justify-center sm:justify-between mx-4">
                     <div id="themeSection">
                         <p>Colour Scheme</p>
                         <select
@@ -46,15 +46,20 @@ export default function Header() {
                             ))}
                         </select>
                     </div>
-                    <div className="flex justify-center items-center">
-                        <p className="text-2xl lg:text-6xl" style={{ fontFamily: "verdana" }}>
-                            SortMaster
-                        </p>
-                    </div>
-                    <div className="flex justify-center items-center">
-                        <p className="text-2xl xl:text-6xl" style={{ fontFamily: "verdana" }}>
-                            ソート マスター
-                        </p>
+                    <div className="flex flex-wrap justify-center space-between">
+                        <div className="flex justify-center items-center">
+                            <p className="text-2xl xl:text-6xl" style={{ fontFamily: "verdana" }}>
+                                SortMaster |
+                            </p>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <p
+                                className="text-2xl xl:text-6xl ml-2"
+                                style={{ fontFamily: "verdana" }}
+                            >
+                                ソート マスター
+                            </p>
+                        </div>
                     </div>
                     <p className="my-auto">By McJeffrey</p>
                 </div>

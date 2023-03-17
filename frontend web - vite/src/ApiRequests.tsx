@@ -1,5 +1,3 @@
-import { SortReportApiModel } from "./components/SortReport";
-
 export interface AlgorithmResponse {
     algorithmName: string;
     bigONotationBest: string;
@@ -25,19 +23,20 @@ export async function ApiPerformSort(selectedAlgorithm: string, arrSize: number)
         }
     );
     let parsed = await response.json();
+    console.log(parsed);
     return parsed;
 }
 
-export async function ApiSendSortReport(sortReport: SortReportApiModel) {
-    const sendBody = JSON.stringify(sortReport);
-    console.log(sendBody);
-
+export async function ApiSendSortReport(sortReport: any) {
     let response = await fetch(`http://localhost:5160/api/SortHistory/SubmitSortHistory`, {
         method: "POST",
-        body: JSON.stringify({ algorithmId: 0 }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sortReport),
     });
     let parsed = await response.json();
-    console.log(parsed);
+    // console.log(parsed);
 }
 
 export async function ApiGetSortReportsByAlgorithmId(algorithmId: number) {
