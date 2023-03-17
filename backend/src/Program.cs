@@ -14,6 +14,14 @@ builder.Services.AddScoped<IAlgorithmRepository, AlgorithmRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5173").AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -23,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
 
