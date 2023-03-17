@@ -69,7 +69,7 @@ class Algorithms
             SortEnded = timeStop,
             TimesCompared = timesCompared,
             ArrayAccesses = arrayAccesses,
-            SortingAttempts = null,
+            SortingAttempts = 1,
             WasCorrectlySorted = true
         };
 
@@ -128,7 +128,7 @@ class Algorithms
             SortEnded = timeStop,
             TimesCompared = timesCompared,
             ArrayAccesses = arrayAccesses,
-            SortingAttempts = null,
+            SortingAttempts = 1,
             WasCorrectlySorted = true
         };
 

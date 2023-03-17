@@ -10,6 +10,7 @@ namespace src.Repositories;
 public class AlgorithmRepository : IAlgorithmRepository
 {
     readonly MasterDbContext _masterDbContext;
+
     public AlgorithmRepository(MasterDbContext context) => _masterDbContext = context;
 
     public async Task<IEnumerable<Algorithm>> GetAllAsync() => await _masterDbContext.Algorithms!.ToListAsync();
