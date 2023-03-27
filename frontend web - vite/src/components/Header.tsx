@@ -30,7 +30,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
+            <div className="mx-3 mb-3 rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
                 <div className="flex flex-wrap justify-center sm:justify-between mx-4">
                     <div id="themeSection">
                         <p>Colour Scheme</p>

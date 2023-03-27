@@ -11,7 +11,7 @@ export default function SortInfo({ algorithm }: Props) {
     return (
         <>
             {/* Sort info */}
-            <div className="p-6 mt-6 rounded-xl bg-blue-300 dark:bg-slate-600">
+            <div className="p-6 m-8 rounded-xl bg-blue-300 dark:bg-slate-600">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold">{algorithm.algorithmName}</h2>
                     <p className="mx-auto md:w-1/2">{algorithm.descriptionText}</p>
@@ -23,7 +23,7 @@ export default function SortInfo({ algorithm }: Props) {
                             <p>Worst case: {algorithm.bigONotationWorst}</p>
                             <p>Average case: {algorithm.bigONotationAverage}</p>
                         </div>
-                        <div className="w-1/2 mt-6">
+                        <div className="md:w-1/2 mt-6">
                             <h4 className="text-xl">Performance</h4>
                             <p>{algorithm.performanceText}</p>
                         </div>

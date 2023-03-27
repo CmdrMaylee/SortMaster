@@ -1,17 +1,4 @@
-import { useState } from "react";
 import { ApiGetSortReportsByAlgorithmId, ApiSendSortReport } from "../ApiRequests";
-
-/* export interface SortReportViewModel {
-    AlgorithmId: number;
-    AlgorithmName: string;
-    ArrayAccesses: number;
-    GetTimeSpan: string;
-    SortEnded: Date;
-    SortStarted: Date;
-    GetFormatedSortEnd: string;
-    SortingAttempts: number;
-    TimesCompared: number;
-} */
 
 export interface SortReportApiModel {
     AlgorithmId: number;
@@ -55,7 +42,7 @@ export default function SortReport({ report, algorithmName }: Props) {
     return (
         <>
             {/* Sort info */}
-            <div className="flex justify-center items-center flex-col p-6 mt-6 rounded-xl bg-blue-300 dark:bg-slate-600">
+            <div className="flex justify-center items-center flex-col p-6 m-8 mb-4 rounded-xl bg-blue-300 dark:bg-slate-600">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold">Successfull sort!</h2>
                     <div className="mt-6 flex mx-auto items-center flex-col">
