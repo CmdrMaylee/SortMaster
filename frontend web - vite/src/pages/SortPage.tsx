@@ -169,7 +169,6 @@ export default function SortPage() {
                     <WarningMessage
                         title="Warning"
                         message="BogoSort can take several minutes to sort a list of more than 10 items. Caution is advised."
-                        canCancel={awaitSortResponse}
                     ></WarningMessage>
                 )}
                 {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}

@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "abort-controller": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-overlay": "^1.0.1"
