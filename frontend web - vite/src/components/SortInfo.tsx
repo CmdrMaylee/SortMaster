@@ -1,7 +1,7 @@
 import { AlgorithmResponse } from "../ApiRequests";
 
 interface Props {
-    algorithm: AlgorithmResponse;
+    algorithm: AlgorithmResponse | undefined;
 }
 
 export default function SortInfo({ algorithm }: Props) {
@@ -11,8 +11,9 @@ export default function SortInfo({ algorithm }: Props) {
     return (
         <>
             {/* Sort info */}
-            <div className="p-6 m-8 rounded-xl bg-blue-300 dark:bg-slate-600">
-                <div className="text-center">
+            <div className="m-8 rounded-xl text-center bg-emerald-400 dark:bg-emerald-800">
+                <h2 className="text-4xl font-bold tracking-widest">Info</h2>
+                <div className="p-6 rounded-xl bg-blue-300 dark:bg-slate-600">
                     <h2 className="text-3xl font-bold">{algorithm.algorithmName}</h2>
                     <p className="mx-auto md:w-1/2">{algorithm.descriptionText}</p>
 

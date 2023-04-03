@@ -7,6 +7,15 @@ export interface AlgorithmResponse {
     performanceText: string;
 }
 
+export interface SortHistoryResponse {
+    SortStarted: string;
+    SortEnded: string;
+    TimesCompared: number;
+    ArrayAccesses: number;
+    SortingAttempts: number;
+    WasCorrectlySorted: number;
+}
+
 interface PerformSortResponse {}
 
 export async function ApiFetchAlgorithms() {
@@ -39,9 +48,10 @@ export async function ApiSendSortReport(sortReport: any) {
     // console.log(parsed);
 }
 
-export async function ApiGetSortReportsByAlgorithmId(algorithmId: number) {
+export async function ApiGetSortReportsByAlgorithmId(algorithmId: number | undefined) {
     let response = await fetch(
         `http://localhost:5160/api/SortHistory/GetSortHistoriesByAlgorithmId/${algorithmId}`
     );
-    return response;
+    let parsed = (await response.json()) as SortHistoryResponse[];
+    return parsed;
 }
