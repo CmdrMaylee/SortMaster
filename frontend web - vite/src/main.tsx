@@ -7,7 +7,6 @@ import SortPage from "./pages/SortPage";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <div className="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-100">
-            <Header />
             <SortPage />
         </div>
     </React.StrictMode>

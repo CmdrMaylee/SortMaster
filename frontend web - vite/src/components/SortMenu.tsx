@@ -91,7 +91,7 @@ export default function SortMenu({
     }, []);
 
     return (
-        <div className="p-6 rounded-xl m-8 mb-4 bg-blue-300 text-2xl lg:text-5xl dark:bg-slate-600">
+        <div className="p-6 rounded-xl bg-blue-300 text-2xl lg:text-5xl dark:bg-slate-600">
             {/* Bars */}
             <Bars arr={arr} visualHeight={5} randomize={randomizeArray} />
 

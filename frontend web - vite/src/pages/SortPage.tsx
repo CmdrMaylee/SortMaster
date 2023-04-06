@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { AlgorithmResponse } from "../ApiRequests";
+import Header from "../components/Header";
 import Scoreboard from "../components/Scoreboard";
 import SortInfo from "../components/SortInfo";
 import SortMenu from "../components/SortMenu";
 import SortReport, { SortReportApiModel } from "../components/SortReport";
-import WarningMessage from "../components/WarningMessage";
 
 export default function SortPage() {
     /* STATES */
@@ -14,32 +14,36 @@ export default function SortPage() {
 
     return (
         <>
-            {/* Sort Menu */}
-            <SortMenu
-                setCurrentSortReport={setCurrentSortReport}
-                selectedAlgorithm={selectedAlgorithm}
-                setSelectedAlgorithm={setSelectedAlgorithm}
-            ></SortMenu>
+            <Header />
 
-            {/* Sort Report | CONDITIONAL */}
-            {currentSortReport && (
-                <SortReport
-                    report={currentSortReport}
-                    algorithmName={selectedAlgorithm?.algorithmName}
-                ></SortReport>
-            )}
+            <div className="flex flex-col gap-6 px-0 md:px-10 mt-5">
+                {/* Sort Menu */}
+                <SortMenu
+                    setCurrentSortReport={setCurrentSortReport}
+                    selectedAlgorithm={selectedAlgorithm}
+                    setSelectedAlgorithm={setSelectedAlgorithm}
+                ></SortMenu>
 
-            <Scoreboard algorithmId={currentSortReport?.AlgorithmId ?? 0}></Scoreboard>
+                {/* Sort Report | CONDITIONAL */}
+                {currentSortReport && (
+                    <div className="flex gap-6 w-full">
+                        <SortReport
+                            report={currentSortReport}
+                            algorithmName={selectedAlgorithm?.algorithmName}
+                        ></SortReport>
 
-            {/* Sort Info */}
-            <div className="flex flex-col xl:flex-row">
-                {selectedAlgorithm?.algorithmName === "BogoSort" && (
-                    <WarningMessage
-                        title="Warning"
-                        message="BogoSort can take several minutes to sort a list of more than 10 items. Caution is advised."
-                    ></WarningMessage>
+                        {selectedAlgorithm && currentSortReport && (
+                            <Scoreboard
+                                algorithmId={currentSortReport?.AlgorithmId ?? 0}
+                            ></Scoreboard>
+                        )}
+                    </div>
                 )}
-                {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}
+
+                {/* Sort Info */}
+                <div className="">
+                    {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}
+                </div>
             </div>
 
             {}
