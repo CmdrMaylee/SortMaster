@@ -1,30 +1,33 @@
 import { useEffect, useState } from "react";
-import { ApiGetSortReportsByAlgorithmId, SortHistoryResponse } from "../ApiRequests";
+import {
+    AlgorithmResponse,
+    ApiGetSortReportsByAlgorithmId,
+    SortHistoryResponse,
+} from "../ApiRequests";
 
 interface Props {
-    algorithmId: number | undefined;
+    algorithm: AlgorithmResponse | undefined;
 }
 
-export default function Scoreboard({ algorithmId }: Props) {
+export default function Scoreboard({ algorithm }: Props) {
     const [sortHistory, setSortHistory] = useState<SortHistoryResponse[] | undefined>([]);
 
     useEffect(() => {
         const getSortHistories = async () => {
-            let histories = await ApiGetSortReportsByAlgorithmId(algorithmId);
+            let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId);
             console.log(histories);
 
             setSortHistory(histories);
         };
 
         getSortHistories();
-    }, []);
-
-    useEffect(() => {}, [sortHistory]);
+    }, [algorithm]);
 
     return (
         <div className="flex flex-col grow rounded-xl text-center bg-cyan-400 dark:bg-cyan-700">
             <h2 className="text-4xl font-bold tracking-widest">Scoreboard</h2>
             <div className="flex-grow text-left justify-center items-center flex-col p-6 rounded-xl bg-blue-300 dark:bg-slate-600">
+                <h2 className="text-xl2">{}</h2>
                 <table className="table-auto w-full">
                     <thead>
                         <tr>
@@ -37,8 +40,8 @@ export default function Scoreboard({ algorithmId }: Props) {
                     <tbody>
                         {sortHistory?.map((item, index) => (
                             <tr key={index}>
-                                <td>TBD</td>
-                                <td>{item.sortStarted}</td>
+                                <td>{item.getTimeSpan}</td>
+                                <td>{item.getFormatedSortEnd}</td>
                                 <td>{item.timesCompared}</td>
                                 <td>{item.arrayAccesses}</td>
                             </tr>

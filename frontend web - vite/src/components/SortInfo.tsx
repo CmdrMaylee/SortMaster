@@ -19,7 +19,7 @@ export default function SortInfo({ algorithm }: Props) {
                         {algorithm?.algorithmName === "BogoSort" && (
                             <WarningMessage
                                 title="Warning"
-                                message="Beyond an array size of 10, BogoSort can take several minutes(possibly hours after 12-13) to sort. Caution is advised if you start a sorting operation."
+                                message="Beyond an array size of 10, BogoSort can take several minutes(possibly hours after a size of 12-13) to sort. Caution is advised if you start a sorting operation."
                             ></WarningMessage>
                         )}
                         <div>

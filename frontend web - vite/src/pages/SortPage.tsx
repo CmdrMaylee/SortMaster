@@ -25,20 +25,15 @@ export default function SortPage() {
                 ></SortMenu>
 
                 {/* Sort Report | CONDITIONAL */}
-                {currentSortReport && (
-                    <div className="flex gap-6 w-full">
+                <div className="flex gap-6 w-full">
+                    {currentSortReport && (
                         <SortReport
                             report={currentSortReport}
                             algorithmName={selectedAlgorithm?.algorithmName}
                         ></SortReport>
-
-                        {selectedAlgorithm && currentSortReport && (
-                            <Scoreboard
-                                algorithmId={currentSortReport?.AlgorithmId ?? 0}
-                            ></Scoreboard>
-                        )}
-                    </div>
-                )}
+                    )}
+                    {selectedAlgorithm && <Scoreboard algorithm={selectedAlgorithm}></Scoreboard>}
+                </div>
 
                 {/* Sort Info */}
                 <div className="">

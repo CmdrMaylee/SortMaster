@@ -1,4 +1,5 @@
 export interface AlgorithmResponse {
+    algorithmId: number;
     algorithmName: string;
     bigONotationBest: string;
     bigONotationWorst: string;
@@ -14,6 +15,8 @@ export interface SortHistoryResponse {
     arrayAccesses: number;
     sortingAttempts: number;
     wasCorrectlySorted: number;
+    getTimeSpan: string;
+    getFormatedSortEnd: string;
 }
 
 interface PerformSortResponse {}

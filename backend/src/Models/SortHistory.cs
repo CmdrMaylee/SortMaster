@@ -29,7 +29,7 @@ public class SortHistory
     {
         get
         {
-            return this.SortEnded.ToString("H:mm:ss");
+            return this.SortEnded.ToString("yyyy/MM/dd");
         }
     }
 
