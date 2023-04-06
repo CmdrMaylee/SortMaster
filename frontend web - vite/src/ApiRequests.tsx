@@ -8,12 +8,12 @@ export interface AlgorithmResponse {
 }
 
 export interface SortHistoryResponse {
-    SortStarted: string;
-    SortEnded: string;
-    TimesCompared: number;
-    ArrayAccesses: number;
-    SortingAttempts: number;
-    WasCorrectlySorted: number;
+    sortStarted: string;
+    sortEnded: string;
+    timesCompared: number;
+    arrayAccesses: number;
+    sortingAttempts: number;
+    wasCorrectlySorted: number;
 }
 
 interface PerformSortResponse {}
