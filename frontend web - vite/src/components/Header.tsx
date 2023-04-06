@@ -49,9 +49,15 @@ export default function Header() {
                     <div className="flex flex-wrap justify-center space-between">
                         <div className="flex justify-center items-center">
                             <p className="text-2xl xl:text-6xl" style={{ fontFamily: "verdana" }}>
-                                SortMaster |
+                                SortMaster
                             </p>
                         </div>
+                        <p
+                            className="mx-10 md:mx-20 text-2xl xl:text-6xl"
+                            style={{ fontFamily: "verdana" }}
+                        >
+                            /|\
+                        </p>
                         <div className="flex justify-center items-center">
                             <p
                                 className="text-2xl xl:text-6xl ml-2"

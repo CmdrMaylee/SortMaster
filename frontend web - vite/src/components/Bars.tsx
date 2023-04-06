@@ -24,7 +24,7 @@ function shuffle(array: number[]) {
 }
 
 const RenderBars = (arr: number[], visualHeight: number, randomize: boolean) => {
-    arr = arr.slice(0, 50);
+    arr = arr.slice(0, 100);
 
     if (randomize) arr = shuffle(arr);
 

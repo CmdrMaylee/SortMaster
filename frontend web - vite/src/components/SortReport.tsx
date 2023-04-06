@@ -31,11 +31,6 @@ export default function SortReport({ report, algorithmName }: Props) {
         let result = await ApiSendSortReport(send);
     }
 
-    async function demo() {
-        let result = await ApiGetSortReportsByAlgorithmId(0);
-        console.log(result);
-    }
-
     if (!report) {
         return <></>;
     }
