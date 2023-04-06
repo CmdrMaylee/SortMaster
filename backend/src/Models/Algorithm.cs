@@ -6,10 +6,10 @@ public class Algorithm
 {
     [Key]
     public int AlgorithmId { get; set; }
-    public string AlgorithmName { get; set; }
-    public string BigONotationBest { get; set; }
-    public string BigONotationWorst { get; set; }
-    public string BigONotationAverage { get; set; }
-    public string DescriptionText { get; set; }
-    public string PerformanceText { get; set; }
+    public string AlgorithmName { get; set; } = "NoSort";
+    public string BigONotationBest { get; set; } = "O(?)";
+    public string BigONotationWorst { get; set; } = "O(?)";
+    public string BigONotationAverage { get; set; } = "O(?)";
+    public string DescriptionText { get; set; } = "Null";
+    public string PerformanceText { get; set; } = "Null";
 }
