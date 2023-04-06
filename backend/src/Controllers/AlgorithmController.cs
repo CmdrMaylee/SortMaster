@@ -35,12 +35,12 @@ public class AlgorithmController : ControllerBase
         {
             Algorithm algorithm = new Algorithm()
             {
-                AlgorithmName = algorithmDto.AlgorithmName,
-                BigONotationBest = algorithmDto.BigONotationBest,
-                BigONotationWorst = algorithmDto.BigONotationWorst,
-                BigONotationAverage = algorithmDto.BigONotationAverage,
-                DescriptionText = algorithmDto.DescriptionText,
-                PerformanceText = algorithmDto.PerformanceText
+                AlgorithmName = algorithmDto.AlgorithmName ?? throw new NullReferenceException(), //TODO Is there a better way to work around the null possibility?
+                BigONotationBest = algorithmDto.BigONotationBest ?? throw new NullReferenceException(),
+                BigONotationWorst = algorithmDto.BigONotationWorst ?? throw new NullReferenceException(),
+                BigONotationAverage = algorithmDto.BigONotationAverage ?? throw new NullReferenceException(),
+                DescriptionText = algorithmDto.DescriptionText ?? throw new NullReferenceException(),
+                PerformanceText = algorithmDto.PerformanceText ?? throw new NullReferenceException()
             };
 
             await algorithmRepository.InsertAlgorithm(algorithm);
