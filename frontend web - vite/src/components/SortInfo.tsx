@@ -15,7 +15,7 @@ export default function SortInfo({ algorithm }: Props) {
             <div className="rounded-xl text-center bg-emerald-400 dark:bg-emerald-800">
                 <h2 className="text-4xl font-bold tracking-widest">Info</h2>
                 <div className="p-6 rounded-xl bg-blue-300 dark:bg-slate-600">
-                    <div className="flex gap-10">
+                    <div className="flex items-center gap-10">
                         {algorithm?.algorithmName === "BogoSort" && (
                             <WarningMessage
                                 title="Warning"

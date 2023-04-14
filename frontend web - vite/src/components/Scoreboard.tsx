@@ -7,14 +7,15 @@ import {
 
 interface Props {
     algorithm: AlgorithmResponse | undefined;
+    arrSize: number;
 }
 
-export default function Scoreboard({ algorithm }: Props) {
+export default function Scoreboard({ algorithm, arrSize }: Props) {
     const [sortHistory, setSortHistory] = useState<SortHistoryResponse[] | undefined>([]);
 
     useEffect(() => {
         const getSortHistories = async () => {
-            let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId);
+            let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId, arrSize);
             console.log(histories);
 
             setSortHistory(histories);
@@ -30,18 +31,20 @@ export default function Scoreboard({ algorithm }: Props) {
                 <h2 className="text-xl2">{}</h2>
                 <table className="table-auto w-full">
                     <thead>
-                        <tr>
-                            <th>Sorting time</th>
+                        <tr className="bg-slate-700">
+                            <th className="p-1">Sorting time</th>
                             <th>Date sorted</th>
+                            <th>Array size</th>
                             <th>Times compared</th>
                             <th>Array accesses</th>
                         </tr>
                     </thead>
                     <tbody>
                         {sortHistory?.map((item, index) => (
-                            <tr key={index}>
+                            <tr key={index} className="hover:bg-slate-800">
                                 <td>{item.getTimeSpan}</td>
                                 <td>{item.getFormatedSortEnd}</td>
+                                <td>{item.arraySize}</td>
                                 <td>{item.timesCompared}</td>
                                 <td>{item.arrayAccesses}</td>
                             </tr>

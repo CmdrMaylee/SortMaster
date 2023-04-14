@@ -32,14 +32,18 @@ export default function SortPage() {
                             algorithmName={selectedAlgorithm?.algorithmName}
                         ></SortReport>
                     )}
-                    {selectedAlgorithm && <Scoreboard algorithm={selectedAlgorithm}></Scoreboard>}
+                    {selectedAlgorithm && (
+                        <Scoreboard algorithm={selectedAlgorithm} arrSize={}></Scoreboard>
+                    )}
                 </div>
 
                 {/* Sort Info */}
-                <div className="">
+                <div>
                     {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}
                 </div>
             </div>
+
+            <div className="h-16"></div>
 
             {}
         </>
