@@ -7,15 +7,14 @@ import {
 
 interface Props {
     algorithm: AlgorithmResponse | undefined;
-    arrSize: number;
 }
 
-export default function Scoreboard({ algorithm, arrSize }: Props) {
+export default function Scoreboard({ algorithm }: Props) {
     const [sortHistory, setSortHistory] = useState<SortHistoryResponse[] | undefined>([]);
 
     useEffect(() => {
         const getSortHistories = async () => {
-            let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId, arrSize);
+            let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId);
             console.log(histories);
 
             setSortHistory(histories);
