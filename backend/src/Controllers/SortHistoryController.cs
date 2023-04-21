@@ -24,7 +24,7 @@ public class SortHistoryController : ControllerBase
     }
 
     [HttpGet("GetSortHistoriesByAlgorithmId/{id}")]
-    public async Task<IActionResult> GetAllSortHistoriesByAlgorithmIdAsync(int id, int arrSize)
+    public async Task<IActionResult> GetAllSortHistoriesByAlgorithmIdAsync(int id)
     {
         var result = await sortHistoryRepository.GetByAlgorithmId(id);
         if (result == null) return NotFound();

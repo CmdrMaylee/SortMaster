@@ -37,6 +37,7 @@ export async function ApiPerformSort(selectedAlgorithm: string, arrSize: number)
     );
     let parsed = await response.json();
     console.log(parsed);
+
     return parsed;
 }
 
@@ -49,7 +50,6 @@ export async function ApiSendSortReport(sortReport: any) {
         body: JSON.stringify(sortReport),
     });
     let parsed = await response.json();
-    // console.log(parsed);
 }
 
 export async function ApiGetSortReportsByAlgorithmId(
@@ -57,9 +57,8 @@ export async function ApiGetSortReportsByAlgorithmId(
     arrSize: number
 ) {
     let response = await fetch(
-        `http://localhost:5160/api/SortHistory/GetSortHistoriesByAlgorithmId/${algorithmId}/${arrSize}`
+        `http://localhost:5160/api/SortHistory/GetSortHistoriesByAlgorithmId/${algorithmId}`
     );
-    console.log(response);
     let parsed = (await response.json()) as SortHistoryResponse[];
     return parsed;
 }
