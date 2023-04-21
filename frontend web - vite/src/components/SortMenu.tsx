@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AlgorithmResponse, ApiFetchAlgorithms, ApiPerformSort } from "../ApiRequests";
+import { setValue } from "../state/arrSizeSlice";
+import { RootState } from "../state/store";
 import Bars from "./Bars";
-import { SortReportApiModel } from "./SortReport";
+import { setReport } from "../state/sortReportSlice";
 
 interface Props {
-    setCurrentSortReport: React.Dispatch<React.SetStateAction<SortReportApiModel | undefined>>;
     selectedAlgorithm: AlgorithmResponse | undefined;
     setSelectedAlgorithm: React.Dispatch<React.SetStateAction<AlgorithmResponse | undefined>>;
 }
 
-export default function SortMenu({
-    setCurrentSortReport,
-    selectedAlgorithm,
-    setSelectedAlgorithm,
-}: Props) {
+export default function SortMenu({ selectedAlgorithm, setSelectedAlgorithm }: Props) {
     /* STATES */
 
+    const arrSize = useSelector((state: RootState) => state.arrSize.value);
+    const dispatch = useDispatch();
+
     const [arr, setArr] = useState([1, 2]);
-    const [arrSize, setArrSize] = useState(arr.length);
     const [algorithms, setAlgorithms] = useState<AlgorithmResponse[]>([]);
     const [randomizeArray, setRandomizeArray] = useState<boolean>(true);
     const [isSortButtonValid, setIsSortButtonValid] = useState(true);
@@ -31,7 +31,7 @@ export default function SortMenu({
         let result = await ApiPerformSort(selectedAlgorithm!.algorithmName, arrSize);
 
         setAwaitSortResponse(false);
-        setCurrentSortReport(result);
+        dispatch(setReport(result));
         setRandomizeArray(false);
     }
 
@@ -71,7 +71,8 @@ export default function SortMenu({
 
         setRandomizeArray(true);
 
-        setArrSize(num);
+        // setArrSize(num);
+        dispatch(setValue(num));
         setRandomizeArray(true);
         updateArray();
     };

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ApiSendSortReport } from "../ApiRequests";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 export interface SortReportApiModel {
     AlgorithmId: number;
@@ -15,30 +17,27 @@ export interface SortReportApiModel {
 }
 
 interface Props {
-    report: SortReportApiModel;
     algorithmName: string | undefined;
 }
 
-export default function SortReport({ report, algorithmName }: Props) {
+export default function SortReport({ algorithmName }: Props) {
     const [sendingReport, setSendingReport] = useState(false);
-    const [wasSent, setWasSent] = useState(false);
+    const report = useSelector((state: RootState) => state.currentSortReport.value);
 
     async function SendReport() {
-        setWasSent(false);
         setSendingReport(true);
         const send = {
-            AlgorithmId: report.AlgorithmId,
-            SortStarted: report.SortStarted,
-            SortEnded: report.SortEnded,
-            ArraySize: report.ArraySize,
-            TimesCompared: report.TimesCompared,
-            ArrayAccesses: report.ArrayAccesses,
-            SortingAttempts: report.SortingAttempts,
+            AlgorithmId: report!.AlgorithmId,
+            SortStarted: report!.SortStarted,
+            SortEnded: report!.SortEnded,
+            ArraySize: report!.ArraySize,
+            TimesCompared: report!.TimesCompared,
+            ArrayAccesses: report!.ArrayAccesses,
+            SortingAttempts: report!.SortingAttempts,
             WasCancelled: false,
         };
         let result = await ApiSendSortReport(send);
         setSendingReport(false);
-        setWasSent(true);
     }
 
     if (!report) {
@@ -48,7 +47,6 @@ export default function SortReport({ report, algorithmName }: Props) {
         <>
             {/* Sort info */}
             <div className="grow rounded-xl text-center bg-amber-400 dark:bg-amber-700">
-                {wasSent}
                 <h2 className="text-4xl font-bold tracking-widest">Result</h2>
                 <div className="flex justify-center items-center flex-col p-6 rounded-xl bg-blue-300 dark:bg-slate-600">
                     <div className="text-center">
@@ -60,6 +58,7 @@ export default function SortReport({ report, algorithmName }: Props) {
                                 <p>Comparisons: {report.TimesCompared}</p>
                                 <p>Total time to sort: {report.GetTimeSpan}</p>
                                 <p>Sort finished: {report.GetFormatedSortEnd}</p>
+                                <p>Array size: {report.ArraySize}</p>
                             </div>
                             <div className="w-1/2 mt-6"></div>
                         </div>
