@@ -31,43 +31,37 @@ export default function Header() {
     return (
         <>
             <div className="mx-3 mb-3 rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
-                <div className="flex flex-wrap justify-center sm:justify-between mx-4">
-                    <div id="themeSection">
-                        <p>Colour Scheme</p>
-                        <select
-                            value={currentTheme}
-                            onChange={(event) => {
-                                onThemeChange(event.target.value);
-                            }}
-                            className="bg-white rounded dark:bg-slate-800"
-                        >
-                            {themeOptions.map((x, i) => (
-                                <option key={i}>{x}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex flex-wrap justify-center space-between">
-                        <div className="flex justify-center items-center">
-                            <p className="text-2xl xl:text-6xl" style={{ fontFamily: "verdana" }}>
+                <div className="flex justify-center items-center flex-col sm:justify-between mx-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-around w-full lg:text-6xl md:text-5xl text-2xl">
+                        <div>
+                            <p className="" style={{ fontFamily: "verdana" }}>
                                 SortMaster
                             </p>
                         </div>
-                        <p
-                            className="mx-10 md:mx-20 text-2xl xl:text-6xl"
-                            style={{ fontFamily: "verdana" }}
-                        >
-                            /|\
-                        </p>
-                        <div className="flex justify-center items-center">
-                            <p
-                                className="text-2xl xl:text-6xl ml-2"
-                                style={{ fontFamily: "verdana" }}
-                            >
-                                ソート マスター
-                            </p>
+                        <div>
+                            <p style={{ fontFamily: "verdana" }}>/|\</p>
+                        </div>
+                        <div>
+                            <p style={{ fontFamily: "verdana" }}>ソート マスター</p>
                         </div>
                     </div>
-                    <p className="my-auto">By McJeffrey</p>
+                    <div id="themeSection" className="flex items-center justify-between w-full">
+                        <div>
+                            <p>Colour Scheme</p>
+                            <select
+                                value={currentTheme}
+                                onChange={(event) => {
+                                    onThemeChange(event.target.value);
+                                }}
+                                className="bg-white rounded dark:bg-slate-800"
+                            >
+                                {themeOptions.map((x, i) => (
+                                    <option key={i}>{x}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <p>By McJeffrey</p>
+                    </div>
                 </div>
             </div>
         </>

@@ -15,7 +15,6 @@ export default function Scoreboard({ algorithm }: Props) {
     useEffect(() => {
         const getSortHistories = async () => {
             let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId);
-            console.log(histories);
 
             setSortHistory(histories);
         };
@@ -26,11 +25,11 @@ export default function Scoreboard({ algorithm }: Props) {
     return (
         <div className="flex flex-col grow rounded-xl text-center bg-cyan-400 dark:bg-cyan-700">
             <h2 className="text-4xl font-bold tracking-widest">Scoreboard</h2>
-            <div className="flex-grow text-left justify-center items-center flex-col p-6 rounded-xl bg-blue-300 dark:bg-slate-600">
+            <div className="flex-grow text-left justify-center items-center flex-col p-0 pb-4 md:p-6 rounded-xl bg-blue-300 dark:bg-slate-600">
                 <h2 className="text-xl2">{}</h2>
                 <table className="table-auto w-full">
                     <thead>
-                        <tr className="bg-slate-700">
+                        <tr className="bg-slate-200 dark:bg-slate-700">
                             <th className="p-1">Sorting time</th>
                             <th>Date sorted</th>
                             <th>Array size</th>
@@ -40,7 +39,7 @@ export default function Scoreboard({ algorithm }: Props) {
                     </thead>
                     <tbody>
                         {sortHistory?.map((item, index) => (
-                            <tr key={index} className="hover:bg-slate-800">
+                            <tr key={index} className="hover:bg-slate-400 hover::dark:bg-slate-800">
                                 <td>{item.getTimeSpan}</td>
                                 <td>{item.getFormatedSortEnd}</td>
                                 <td>{item.arraySize}</td>

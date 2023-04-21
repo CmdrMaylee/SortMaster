@@ -52,10 +52,7 @@ export async function ApiSendSortReport(sortReport: any) {
     let parsed = await response.json();
 }
 
-export async function ApiGetSortReportsByAlgorithmId(
-    algorithmId: number | undefined,
-    arrSize: number
-) {
+export async function ApiGetSortReportsByAlgorithmId(algorithmId: number | undefined) {
     let response = await fetch(
         `http://localhost:5160/api/SortHistory/GetSortHistoriesByAlgorithmId/${algorithmId}`
     );
