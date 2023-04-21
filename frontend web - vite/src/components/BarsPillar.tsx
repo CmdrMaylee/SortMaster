@@ -1,11 +1,10 @@
 interface Props {
     barIndex: number;
     totalBarsSize: number;
-    color: string;
     visualHeight: number;
 }
 
-export default function BarsPillar({ totalBarsSize, barIndex, color, visualHeight }: Props) {
+export default function BarsPillar({ totalBarsSize, barIndex, visualHeight }: Props) {
     const baseHeight = 30;
     const heightDiff = barIndex / totalBarsSize;
     const heightResult = heightDiff * baseHeight * visualHeight;
@@ -15,7 +14,7 @@ export default function BarsPillar({ totalBarsSize, barIndex, color, visualHeigh
             style={{
                 height: heightResult,
             }}
-            className={`border-2 border-blue-800 bg-blue-600 rounded-xl grow basis-0 m-[1px]`}
+            className={`bg-blue-600 grow basis-0`}
         ></div>
     );
 }
