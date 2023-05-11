@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Linq.Expressions;
 using src.Data;
 using src.Models;
 using src.Repositories.Interfaces;
@@ -13,7 +11,10 @@ public class AlgorithmRepository : IAlgorithmRepository
 
     public AlgorithmRepository(MasterDbContext context) => _masterDbContext = context;
 
+
     public async Task<IEnumerable<Algorithm>> GetAllAsync() => await _masterDbContext.Algorithms!.ToListAsync();
+
+    public async Task<Algorithm> GetById(int id) => await _masterDbContext.Algorithms!.FirstOrDefaultAsync(x => x.AlgorithmId == id);
 
     public async Task<Algorithm> InsertAlgorithm(Algorithm algorithm)
     {

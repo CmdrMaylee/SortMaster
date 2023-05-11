@@ -25,6 +25,21 @@ public class AlgorithmController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("GetSortingAlgorithmById/{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        try
+        {
+            var result = await algorithmRepository.GetById(id);
+            if (result == null) return NotFound(result);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
     [HttpPost("InsertAlgorithm")]
     public async Task<IActionResult> InsertAlgorithmAsync([FromBody] AlgorithmDto algorithmDto)
     {
@@ -35,12 +50,12 @@ public class AlgorithmController : ControllerBase
         {
             Algorithm algorithm = new Algorithm()
             {
-                AlgorithmName = algorithmDto.AlgorithmName ?? throw new NullReferenceException(), //TODO Is there a better way to work around the null possibility?
-                BigONotationBest = algorithmDto.BigONotationBest ?? throw new NullReferenceException(),
-                BigONotationWorst = algorithmDto.BigONotationWorst ?? throw new NullReferenceException(),
-                BigONotationAverage = algorithmDto.BigONotationAverage ?? throw new NullReferenceException(),
-                DescriptionText = algorithmDto.DescriptionText ?? throw new NullReferenceException(),
-                PerformanceText = algorithmDto.PerformanceText ?? throw new NullReferenceException()
+                AlgorithmName = algorithmDto.AlgorithmName, //TODO Is there a better way to work around the null possibility?
+                BigONotationBest = algorithmDto.BigONotationBest,
+                BigONotationWorst = algorithmDto.BigONotationWorst,
+                BigONotationAverage = algorithmDto.BigONotationAverage,
+                DescriptionText = algorithmDto.DescriptionText,
+                PerformanceText = algorithmDto.PerformanceText
             };
 
             await algorithmRepository.InsertAlgorithm(algorithm);

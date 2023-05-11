@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ApiSendSortReport } from "../ApiRequests";
-import { useSelector } from "react-redux";
+import { setReport } from "../state/sortReportSlice";
 import { RootState } from "../state/store";
 
 export interface SortReportApiModel {
@@ -16,13 +17,21 @@ export interface SortReportApiModel {
     GetTimeSpan: string;
 }
 
+interface AlgorithmPair {
+    id: number | undefined;
+    name: string;
+}
+
 interface Props {
-    algorithmName: string | undefined;
+    algorithmName: string;
 }
 
 export default function SortReport({ algorithmName }: Props) {
-    const [sendingReport, setSendingReport] = useState(false);
+    const [sendingReport, setSendingReport] = useState<boolean>(false);
+    const [algorithmAndId, setAlgorithmAndId] = useState<AlgorithmPair>();
     const report = useSelector((state: RootState) => state.currentSortReport.value);
+    const dispatch = useDispatch();
+    let apiReport;
 
     async function SendReport() {
         setSendingReport(true);
@@ -38,6 +47,11 @@ export default function SortReport({ algorithmName }: Props) {
         };
         let result = await ApiSendSortReport(send);
         setSendingReport(false);
+        dispatch(setReport(undefined));
+    }
+
+    if (algorithmAndId?.id !== report?.AlgorithmId) {
+        setAlgorithmAndId({ id: report?.AlgorithmId, name: algorithmName });
     }
 
     if (!report) {
@@ -53,7 +67,7 @@ export default function SortReport({ algorithmName }: Props) {
                         <h2 className="text-3xl font-bold">Successfull sort!</h2>
                         <div className="mt-6 flex mx-auto items-center flex-col">
                             <div>
-                                <p>Algorithm: {algorithmName}</p>
+                                <p>Algorithm: {algorithmAndId?.name}</p>
                                 <p>Array access count: {report.ArrayAccesses}</p>
                                 <p>Comparisons: {report.TimesCompared}</p>
                                 <p>Total time to sort: {report.GetTimeSpan}</p>

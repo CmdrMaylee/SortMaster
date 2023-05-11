@@ -34,15 +34,15 @@ export default function Header() {
                 <div className="flex justify-center items-center flex-col sm:justify-between mx-4">
                     <div className="flex flex-col sm:flex-row items-center justify-around w-full lg:text-6xl md:text-5xl text-2xl">
                         <div>
-                            <p className="" style={{ fontFamily: "verdana" }}>
+                            <p className="" style={{ fontFamily: "verdana, sans-serif" }}>
                                 SortMaster
                             </p>
                         </div>
                         <div>
-                            <p style={{ fontFamily: "verdana" }}>/|\</p>
+                            <p style={{ fontFamily: "verdana, sans-serif" }}>/|\</p>
                         </div>
                         <div>
-                            <p style={{ fontFamily: "verdana" }}>ソート マスター</p>
+                            <p style={{ fontFamily: "verdana, sans-serif" }}>ソート マスター</p>
                         </div>
                     </div>
                     <div id="themeSection" className="flex items-center justify-between w-full">

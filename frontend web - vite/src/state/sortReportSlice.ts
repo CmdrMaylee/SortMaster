@@ -13,7 +13,7 @@ export const arraySizeSlice = createSlice({
     name: "arraySize",
     initialState,
     reducers: {
-        setReport: (state, action: PayloadAction<SortReportApiModel>) => {
+        setReport: (state, action: PayloadAction<SortReportApiModel | undefined>) => {
             state.value = action.payload;
         },
     },

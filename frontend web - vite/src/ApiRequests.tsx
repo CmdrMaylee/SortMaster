@@ -59,3 +59,19 @@ export async function ApiGetSortReportsByAlgorithmId(algorithmId: number | undef
     let parsed = (await response.json()) as SortHistoryResponse[];
     return parsed;
 }
+
+export async function ApiGetSortReportTableRowsTotal(algorithmId: number | undefined) {
+    let response = await fetch(
+        `http://localhost:5160/api/SortHistory/GetSortHistoriesByAlgorithmId/${algorithmId}`
+    );
+    let parsed = await response.json();
+    return parsed;
+}
+
+export async function ApiGetAlgorithmById(algorithmId: number | undefined) {
+    let response = await fetch(
+        `http://localhost:5160/api/SortHistory/GetSortHistoriesByAlgorithmId/${algorithmId}`
+    );
+    let parsed = (await response.json()) as AlgorithmResponse;
+    return parsed;
+}
