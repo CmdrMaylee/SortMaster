@@ -18,7 +18,7 @@ export interface SortReportApiModel {
 }
 
 interface AlgorithmPair {
-    id: number | undefined;
+    id: number;
     name: string;
 }
 
@@ -28,7 +28,7 @@ interface Props {
 
 export default function SortReport({ algorithmName }: Props) {
     const [sendingReport, setSendingReport] = useState<boolean>(false);
-    const [algorithmAndId, setAlgorithmAndId] = useState<AlgorithmPair>();
+    const [algorithmAndId, setAlgorithmAndId] = useState<AlgorithmPair>({ id: -1, name: "" }); // TODO Can't be undefined, or report of name crashes the page
     const report = useSelector((state: RootState) => state.currentSortReport.value);
     const dispatch = useDispatch();
     let apiReport;
@@ -50,9 +50,11 @@ export default function SortReport({ algorithmName }: Props) {
         dispatch(setReport(undefined));
     }
 
-    if (algorithmAndId?.id !== report?.AlgorithmId) {
-        setAlgorithmAndId({ id: report?.AlgorithmId, name: algorithmName });
+    //if (report && algorithmAndId) {
+    if (algorithmAndId!.id !== report!.AlgorithmId) {
+        setAlgorithmAndId({ id: report!.AlgorithmId, name: algorithmName });
     }
+    // }
 
     if (!report) {
         return <></>;
@@ -67,7 +69,7 @@ export default function SortReport({ algorithmName }: Props) {
                         <h2 className="text-3xl font-bold">Successfull sort!</h2>
                         <div className="mt-6 flex mx-auto items-center flex-col">
                             <div>
-                                <p>Algorithm: {algorithmAndId?.name}</p>
+                                <p>Algorithm: {algorithmAndId.name}</p>
                                 <p>Array access count: {report.ArrayAccesses}</p>
                                 <p>Comparisons: {report.TimesCompared}</p>
                                 <p>Total time to sort: {report.GetTimeSpan}</p>
@@ -79,15 +81,24 @@ export default function SortReport({ algorithmName }: Props) {
                     </div>
 
                     {!sendingReport && (
-                        <button
-                            type="button"
-                            onClick={SendReport}
-                            disabled={sendingReport}
-                            className="bg-slate-200 dark:bg-slate-700 border-t-4 border-pink-400 px-6 py-1 m-4 rounded text-3xl text-green-700 dark:text-green-300 drop-shadow-md hover:border-x-4"
-                        >
-                            {!sendingReport && <p>Send to Scoreboard</p>}
-                            {sendingReport && <p>Sending...</p>}
-                        </button>
+                        <div>
+                            <button
+                                type="button"
+                                onClick={SendReport}
+                                disabled={sendingReport}
+                                className="bg-slate-200 dark:bg-slate-700 border-t-4 border-pink-400 px-6 py-1 m-4 rounded text-3xl text-pink-700 dark:text-pink-300 drop-shadow-md hover:border-x-4"
+                            >
+                                {!sendingReport && <p>Send to Scoreboard</p>}
+                                {sendingReport && <p>Sending...</p>}
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => dispatch(setReport(undefined))}
+                                className="bg-slate-200 dark:bg-slate-700 border-t-4 border-red-700 px-6 py-1 m-4 rounded text-3xl text-red-600 dark:text-red-500 drop-shadow-md hover:border-x-4"
+                            >
+                                Erase
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>

@@ -14,7 +14,8 @@ export default function Scoreboard({ algorithm }: Props) {
 
     useEffect(() => {
         const getSortHistories = async () => {
-            let histories = await ApiGetSortReportsByAlgorithmId(algorithm?.algorithmId);
+            if (algorithm == undefined) return;
+            let histories = await ApiGetSortReportsByAlgorithmId(algorithm.algorithmId);
 
             setSortHistory(histories);
         };
