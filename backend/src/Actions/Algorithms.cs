@@ -10,7 +10,8 @@ class Algorithms
     {
         "BubbleSort",
         "InsertionSort",
-        "BogoSort"
+        "BogoSort",
+        "CombSort"
     };
 
     // public List<string> GetAllAlgorithms() => AlgorithmCollection;
@@ -30,6 +31,8 @@ class Algorithms
                 return InsertionSort(scrambledArr);
             case 2:
                 return BogoSort(scrambledArr);
+            case 3:
+                return CombSort(scrambledArr);
             default:
                 return null;
         }
@@ -59,6 +62,59 @@ class Algorithms
                     isSorted = false;
                 }
             }
+        } while (isSorted == false);
+        DateTime timeStop = DateTime.Now;
+
+        SortHistory sh = new(/* arr */)
+        {
+            AlgorithmId = 0,
+            SortStarted = timeStart,
+            SortEnded = timeStop,
+            ArraySize = arr.Length,
+            TimesCompared = timesCompared,
+            ArrayAccesses = arrayAccesses,
+            SortingAttempts = 1,
+            WasCorrectlySorted = true
+        };
+
+        return sh;
+    }
+
+    public SortHistory CombSort(int[] arr)
+    {
+        bool isSorted = false;
+        long timesCompared = 0;
+        long arrayAccesses = 0;
+
+        int swap = 0;
+        int gap = arr.Length;
+        float shrink = 1.3F;
+
+        DateTime timeStart = DateTime.Now;
+        do
+        {
+            gap = (int)Math.Floor(gap / shrink);
+
+            if (gap < 1)
+            {
+                isSorted = true;
+                gap = 1;
+            }
+
+            for (int i = 0; i < arr.Length - gap; i++)
+            {
+                swap = gap + i;
+
+                if (arr[i] > arr[swap])
+                {
+                    arrayAccesses += 3;
+                    int temp = arr[i];
+                    arr[i] = arr[swap];
+                    arr[swap] = temp;
+                    isSorted = false;
+                }
+            }
+
         } while (isSorted == false);
         DateTime timeStop = DateTime.Now;
 
