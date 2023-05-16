@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AlgorithmResponse, ApiFetchAlgorithms, ApiPerformSort } from "../ApiRequests";
 import { setValue } from "../state/arrSizeSlice";
+import { setReport } from "../state/sortReportSlice";
 import { RootState } from "../state/store";
 import Bars from "./Bars";
-import { setReport } from "../state/sortReportSlice";
 
 interface Props {
     selectedAlgorithm: AlgorithmResponse | undefined;
@@ -18,6 +18,7 @@ export default function SortMenu({ selectedAlgorithm, setSelectedAlgorithm }: Pr
     const dispatch = useDispatch();
 
     const [arr, setArr] = useState([1, 2]);
+    const [noAlgorithmText, setNoAlgorithmText] = useState<string>();
     const [algorithms, setAlgorithms] = useState<AlgorithmResponse[]>([]);
     const [randomizeArray, setRandomizeArray] = useState<boolean>(true);
     const [isSortButtonValid, setIsSortButtonValid] = useState(true);
@@ -37,7 +38,13 @@ export default function SortMenu({ selectedAlgorithm, setSelectedAlgorithm }: Pr
 
     async function GetAlgorithms() {
         let result = await ApiFetchAlgorithms();
-        setAlgorithms(result);
+
+        if (result == undefined) {
+            setNoAlgorithmText("API Down");
+        } else {
+            setNoAlgorithmText("Choose Algorithm");
+            setAlgorithms(result);
+        }
     }
 
     /* HANDLE ELEMENT-CHANGE METHODS */
@@ -49,11 +56,7 @@ export default function SortMenu({ selectedAlgorithm, setSelectedAlgorithm }: Pr
     };
 
     const validateSortButton = () => {
-        if (
-            // !algorithms. includes(`${selectedAlgorithm?.AlgorithmName}`) ||
-            arrSize < 2 ||
-            selectedAlgorithm == undefined
-        ) {
+        if (arrSize < 2 || selectedAlgorithm == undefined) {
             setIsSortButtonValid(false);
         } else {
             setIsSortButtonValid(true);
@@ -92,62 +95,77 @@ export default function SortMenu({ selectedAlgorithm, setSelectedAlgorithm }: Pr
     }, []);
 
     return (
-        <div className="p-6 rounded-xl bg-blue-300 text-2xl lg:text-5xl dark:bg-slate-600">
-            {/* Bars */}
-            <Bars arr={arr} visualHeight={5} randomize={randomizeArray} />
+        <div className="grow rounded-xl text-center bg-rose-400 dark:bg-rose-700">
+            <h2 className="text-4xl font-bold tracking-widest">Sort</h2>
+            <div className="p-6 rounded-xl bg-blue-300 text-2xl lg:text-5xl dark:bg-slate-600">
+                {/* Bars */}
+                <Bars arr={arr} visualHeight={5} randomize={randomizeArray} />
 
-            {/* Bars input & selection */}
-            <div className="flex items-center flex-col mt-6 md:flex-row">
-                <div className="flex items-center">
-                    <input
-                        type="number"
-                        min={0}
-                        max={100000}
-                        onChange={handleInputChange}
-                        value={arrSize}
-                        className="bg-white text-center rounded-xl dark:bg-slate-800"
-                    />
+                {/* Bars input & selection */}
+                <div className="flex items-center flex-col mt-6 md:flex-row">
+                    <div className="flex items-center">
+                        <input
+                            type="number"
+                            min={0}
+                            max={100000}
+                            onChange={handleInputChange}
+                            value={arrSize}
+                            className="bg-white text-center rounded-xl dark:bg-slate-800"
+                        />
+                    </div>
+                    <select
+                        name="Algorithms"
+                        onChange={handleAlgorithmChange}
+                        className="w-full rounded-2xl md:ml-10 mt-6 bg-white md:mt-0 dark:bg-slate-800"
+                    >
+                        <option>{noAlgorithmText}</option>
+                        {algorithms.map((x, i) => (
+                            <option key={i}>{x.algorithmName}</option>
+                        ))}
+                    </select>
                 </div>
-                <select
-                    name="Algorithms"
-                    onChange={handleAlgorithmChange}
-                    className="w-full rounded-2xl md:ml-10 mt-6 bg-white md:mt-0 dark:bg-slate-800"
-                >
-                    <option>Choose Algorithm</option>
-                    {algorithms.map((x, i) => (
-                        <option key={i}>{x.algorithmName}</option>
-                    ))}
-                </select>
-            </div>
 
-            {/* Sort buttons */}
-            <div className="w-full flex items-center justify-center">
-                {!awaitSortResponse && (
-                    <>
-                        {isSortButtonValid == false && (
-                            <div>
+                {algorithms.length === 0 && (
+                    <div>
+                        <button
+                            type="button"
+                            className="bg-slate-200 dark:bg-slate-700 border-b-4 border-green-700 px-6 py-1 m-4 rounded text-3xl text-green-700 dark:text-green-300 drop-shadow-md hover:border-x-4"
+                            onClick={GetAlgorithms}
+                        >
+                            Reload Algorithms
+                        </button>
+                    </div>
+                )}
+
+                {/* Sort buttons */}
+                <div className="w-full flex items-center justify-center">
+                    {!awaitSortResponse && (
+                        <>
+                            {isSortButtonValid == false && (
+                                <div>
+                                    <button
+                                        type="button"
+                                        className="bg-slate-700 border-b-4 border-slate-500 px-6 py-1 m-4 rounded text-3xl drop-shadow-md opacity-30"
+                                        disabled={true}
+                                    >
+                                        <p>Sort!</p>
+                                    </button>
+                                </div>
+                            )}
+                            {isSortButtonValid == true && (
                                 <button
                                     type="button"
-                                    className="bg-slate-700 border-b-4 border-slate-500 px-6 py-1 m-4 rounded text-3xl drop-shadow-md opacity-30"
-                                    disabled={true}
+                                    onClick={PerformSort}
+                                    className="bg-slate-200 dark:bg-slate-700 border-b-4 border-green-700 px-6 py-1 m-4 rounded text-3xl text-green-700 dark:text-green-300 drop-shadow-md hover:border-x-4"
+                                    disabled={false}
                                 >
                                     <p>Sort!</p>
                                 </button>
-                            </div>
-                        )}
-                        {isSortButtonValid == true && (
-                            <button
-                                type="button"
-                                onClick={PerformSort}
-                                className="bg-slate-200 dark:bg-slate-700 border-b-4 border-green-700 px-6 py-1 m-4 rounded text-3xl text-green-700 dark:text-green-300 drop-shadow-md hover:border-x-4"
-                                disabled={false}
-                            >
-                                <p>Sort!</p>
-                            </button>
-                        )}
-                    </>
-                )}
-                {awaitSortResponse && <p className="animate-pulse">Sorting...</p>}
+                            )}
+                        </>
+                    )}
+                    {awaitSortResponse && <p className="animate-pulse">Sorting...</p>}
+                </div>
             </div>
         </div>
     );
