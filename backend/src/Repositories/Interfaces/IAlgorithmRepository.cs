@@ -6,7 +6,11 @@ public interface IAlgorithmRepository
 {
     Task<IEnumerable<Algorithm>> GetAllAsync();
 
-    Task<Algorithm> GetById(int id);
+    Task<Algorithm> GetByIdAsync(int id);
 
-    Task<Algorithm> InsertAlgorithm(Algorithm algorithm);
+    Task<Algorithm> InsertAlgorithmAsync(Algorithm algorithm);
+
+    Task<Algorithm> EditAlgorithmAsync(Algorithm algorithm);
+
+    Task<Algorithm> DeleteAlgorithmAsync(int algorithmId);
 }

@@ -16,14 +16,14 @@ public class SortHistoryController : ControllerBase
         this.sortHistoryRepository = sortHistoryRepository;
     }
 
-    [HttpGet("GetAllSortHistory")]
+    [HttpGet]
     public async Task<IActionResult> GetAllSortHistoryAsync()
     {
         IEnumerable<SortHistory> result = await sortHistoryRepository.GetAllAsync();
         return Ok(result);
     }
 
-    [HttpGet("GetSortHistoriesByAlgorithmId/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetAllSortHistoriesByAlgorithmIdAsync(int id)
     {
         var result = await sortHistoryRepository.GetByAlgorithmId(id);
@@ -31,7 +31,7 @@ public class SortHistoryController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("SubmitSortHistory")]
+    [HttpPost]
     public async Task<IActionResult> SubmitSortHistoryAsync([FromBody] SortHistoryDto sortHistoryDto)
     {
         if (!ModelState.IsValid)
