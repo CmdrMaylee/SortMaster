@@ -45,7 +45,10 @@ export default function Header() {
                             <p style={{ fontFamily: "verdana, sans-serif" }}>ソート マスター</p>
                         </div>
                     </div>
-                    <div id="themeSection" className="flex items-center justify-between w-full">
+                    <div
+                        id="themeSection"
+                        className="flex items-center justify-between w-full py-4"
+                    >
                         <div>
                             <p>Colour Scheme</p>
                             <select
