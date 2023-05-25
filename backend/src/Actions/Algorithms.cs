@@ -103,6 +103,8 @@ class Algorithms
 
             for (int i = 0; i < arr.Length - gap; i++)
             {
+                arrayAccesses += 2;
+                timesCompared++;
                 swap = gap + i;
 
                 if (arr[i] > arr[swap])
@@ -120,7 +122,7 @@ class Algorithms
 
         SortHistory sh = new(/* arr */)
         {
-            AlgorithmId = 0,
+            AlgorithmId = 3,
             SortStarted = timeStart,
             SortEnded = timeStop,
             ArraySize = arr.Length,

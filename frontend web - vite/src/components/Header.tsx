@@ -33,17 +33,9 @@ export default function Header() {
             <div className="mx-3 mb-3 rounded-b-2xl border-b-4 border-green-500 bg-blue-300 dark:bg-slate-600">
                 <div className="flex justify-center items-center flex-col sm:justify-between mx-4">
                     <div className="flex flex-col sm:flex-row items-center justify-around w-full lg:text-6xl md:text-5xl text-2xl">
-                        <div>
-                            <p className="" style={{ fontFamily: "verdana, sans-serif" }}>
-                                SortMaster
-                            </p>
-                        </div>
-                        <div>
-                            <p style={{ fontFamily: "verdana, sans-serif" }}>/|\</p>
-                        </div>
-                        <div>
-                            <p style={{ fontFamily: "verdana, sans-serif" }}>ソート マスター</p>
-                        </div>
+                        <p className="" style={{ fontFamily: "verdana, sans-serif" }}>
+                            SortMaster: ソート マスター
+                        </p>
                     </div>
                     <div
                         id="themeSection"
@@ -63,7 +55,6 @@ export default function Header() {
                                 ))}
                             </select>
                         </div>
-                        <p>By McJeffrey</p>
                     </div>
                 </div>
             </div>
