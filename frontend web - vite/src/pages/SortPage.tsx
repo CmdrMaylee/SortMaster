@@ -29,7 +29,7 @@ export default function SortPage() {
                 {/* Sort Report | CONDITIONAL */}
                 <div className="flex flex-col lg:flex-row gap-6 w-full">
                     {currentSortReport && (
-                        <SortReport algorithmName={selectedAlgorithm!.algorithmName}></SortReport>
+                        <SortReport algorithmName={selectedAlgorithm?.algorithmName}></SortReport>
                     )}
                     {selectedAlgorithm && <Scoreboard algorithm={selectedAlgorithm}></Scoreboard>}
                 </div>

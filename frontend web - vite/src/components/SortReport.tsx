@@ -19,11 +19,11 @@ export interface SortReportApiModel {
 
 interface AlgorithmPair {
     id: number;
-    name: string;
+    name: string | undefined;
 }
 
 interface Props {
-    algorithmName: string;
+    algorithmName: string | undefined;
 }
 
 export default function SortReport({ algorithmName }: Props) {
