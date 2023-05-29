@@ -16,10 +16,10 @@ export default function SortPage() {
     const currentSortReport = useSelector((state: RootState) => state.currentSortReport.value);
 
     return (
-        <>
+        <div className="flex flex-col min-h-screen">
             <Header />
 
-            <div className="flex flex-col gap-6 px-0 md:px-10 mt-5">
+            <div className="flex flex-col grow gap-6 px-0 md:px-10 mt-5">
                 {/* Sort Menu */}
                 <SortMenu
                     selectedAlgorithm={selectedAlgorithm}
@@ -38,11 +38,10 @@ export default function SortPage() {
                 <div>
                     {selectedAlgorithm && <SortInfo algorithm={selectedAlgorithm}></SortInfo>}
                 </div>
+                <div className="h-16"></div>
             </div>
 
-            <div className="h-16"></div>
-
             <Footer />
-        </>
+        </div>
     );
 }
