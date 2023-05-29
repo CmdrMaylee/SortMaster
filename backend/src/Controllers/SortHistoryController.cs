@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using src.Models;
-using src.Models.Dto;
-using src.Repositories.Interfaces;
+using backend.Models;
+using backend.Models.Dto;
+using backend.Repositories.Interfaces;
 
-namespace src.Controllers;
+namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

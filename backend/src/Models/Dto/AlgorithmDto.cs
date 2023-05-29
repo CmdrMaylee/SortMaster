@@ -1,4 +1,4 @@
-namespace src.Models.Dto;
+namespace backend.Models.Dto;
 
 public class AlgorithmDto
 {

@@ -1,9 +1,9 @@
-using src.Data;
-using src.Models;
-using src.Repositories.Interfaces;
+using backend.Data;
+using backend.Models;
+using backend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace src.Repositories;
+namespace backend.Repositories;
 
 public class AlgorithmRepository : IAlgorithmRepository
 {

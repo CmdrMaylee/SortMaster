@@ -1,12 +1,9 @@
-using System.Linq;
-using System.Linq.Expressions;
-using src.Data;
-using src.Models;
-using src.Repositories.Interfaces;
+using backend.Data;
+using backend.Models;
+using backend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using src.Models.Dto;
 
-namespace src.Repositories;
+namespace backend.Repositories;
 
 public class SortHistoryRepository : ISortHistoryRepository
 {

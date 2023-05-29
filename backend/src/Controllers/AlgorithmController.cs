@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using src.Models;
-using src.Repositories;
-using src.Repositories.Interfaces;
-using src.Models.Dto;
+using backend.Models;
+using backend.Repositories;
+using backend.Repositories.Interfaces;
+using backend.Models.Dto;
 
-namespace src.Controllers;
+namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

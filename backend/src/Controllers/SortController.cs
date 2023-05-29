@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using src.Actions;
-using src.Models;
+using backend.Services;
 
-namespace src.Controllers;
+namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

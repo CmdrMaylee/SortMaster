@@ -1,8 +1,8 @@
-using src.Models;
+using backend.Models;
 
-namespace src.Actions;
+namespace backend.Services;
 
-class Algorithms
+public class Algorithms
 {
     private ArrayHandler arrHandlr = new();
 

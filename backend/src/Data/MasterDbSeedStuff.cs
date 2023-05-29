@@ -1,7 +1,7 @@
-using src.Models;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace src.Data;
+namespace backend.Data;
 
 public class MasterDbSeedStuff
 {

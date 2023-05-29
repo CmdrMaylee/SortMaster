@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using src.Models;
+using backend.Models;
 
-namespace src.Data;
+namespace backend.Data;
 
 public class MasterDbContext : DbContext
 {

@@ -1,6 +1,6 @@
-using src.Models;
+using backend.Models;
 
-namespace src.Repositories.Interfaces;
+namespace backend.Repositories.Interfaces;
 
 public interface IAlgorithmRepository
 {

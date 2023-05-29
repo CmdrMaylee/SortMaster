@@ -1,6 +1,6 @@
-namespace src.Actions;
+namespace backend.Services;
 
-class ArrayHandler
+public class ArrayHandler
 {
     public int[] CreateOrderedArray(int size)
     {

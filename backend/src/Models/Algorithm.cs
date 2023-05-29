@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace src.Models;
+namespace backend.Models;
 
 public class Algorithm
 {
