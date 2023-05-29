@@ -20,12 +20,12 @@ export interface SortHistoryResponse {
     getFormatedSortEnd: string;
 }
 
-interface PerformSortResponse {}
+let connectionAddress = "localhost";
 
 export async function ApiFetchAlgorithms() {
     let response;
     try {
-        response = await fetch("http://localhost:5160/api/Algorithms");
+        response = await fetch(`http://${connectionAddress}:5160/api/Algorithms`);
     } catch (e) {
         return undefined;
     }
@@ -38,7 +38,7 @@ export async function ApiFetchAlgorithms() {
 
 export async function ApiPerformSort(selectedAlgorithm: string, arrSize: number) {
     let response = await fetch(
-        `http://localhost:5160/api/Sort/PerformSort?algorithm=${selectedAlgorithm}&arrSize=${arrSize}`,
+        `http://${connectionAddress}:5160/api/Sort/PerformSort?algorithm=${selectedAlgorithm}&arrSize=${arrSize}`,
         {
             method: "POST",
         }
@@ -49,7 +49,7 @@ export async function ApiPerformSort(selectedAlgorithm: string, arrSize: number)
 }
 
 export async function ApiSendSortReport(sortReport: any) {
-    let response = await fetch(`http://localhost:5160/api/SortHistory`, {
+    let response = await fetch(`http://${connectionAddress}:5160/api/SortHistory`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -60,19 +60,19 @@ export async function ApiSendSortReport(sortReport: any) {
 }
 
 export async function ApiGetSortReportsByAlgorithmId(algorithmId: number | undefined) {
-    let response = await fetch(`http://localhost:5160/api/SortHistory/${algorithmId}`);
+    let response = await fetch(`http://${connectionAddress}:5160/api/SortHistory/${algorithmId}`);
     let parsed = (await response.json()) as SortHistoryResponse[];
     return parsed;
 }
 
 export async function ApiGetSortReportTableRowsTotal(algorithmId: number | undefined) {
-    let response = await fetch(`http://localhost:5160/api/SortHistory/${algorithmId}`);
+    let response = await fetch(`http://${connectionAddress}:5160/api/SortHistory/${algorithmId}`);
     let parsed = await response.json();
     return parsed;
 }
 
 export async function ApiGetAlgorithmById(algorithmId: number | undefined) {
-    let response = await fetch(`http://localhost:5160/api/SortHistory/${algorithmId}`);
+    let response = await fetch(`http://${connectionAddress}:5160/api/SortHistory/${algorithmId}`);
     let parsed = (await response.json()) as AlgorithmResponse;
     return parsed;
 }
