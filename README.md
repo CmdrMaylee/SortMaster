@@ -6,7 +6,7 @@ A web app that teach about sorting algorithms and present it in an edutainment w
 
 The program is separated into 2 projects: Backend & Frontend Web. Either can be run on their own. The service is currently not hosted on any separate domain, and can thus only be run locally.
 
-Backend: Open a terminal in "backend\src\" and execute "dotnet run" to run a local instance of the backend(database uses SqlLite, which the frontend will automatically connect to).
+Backend: Open a terminal in "backend\src\" and execute "dotnet restore". Once the project is fully restored, run "dotnet run" from the same directory to start a local instance of the backend(database uses SqlLite, which the frontend will automatically connect to).
 
 Frontend Web: NODEJS WITH NPM REQUIRED. Open a terminal window in "frontend web - vite\src\" and run the command "npm install". Once installation is succesfull, run "npm run dev" to initiate a local version of the web page.
 
