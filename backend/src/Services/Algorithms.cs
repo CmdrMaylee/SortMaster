@@ -11,7 +11,8 @@ public class Algorithms
         "BubbleSort",
         "InsertionSort",
         "BogoSort",
-        "CombSort"
+        "CombSort",
+        "QuickSort"
     };
 
     // public List<string> GetAllAlgorithms() => AlgorithmCollection;
@@ -33,6 +34,8 @@ public class Algorithms
                 return BogoSort(scrambledArr);
             case 3:
                 return CombSort(scrambledArr);
+            case 4:
+                return QuickSort(scrambledArr);
             default:
                 return null;
         }
@@ -56,9 +59,7 @@ public class Algorithms
                 if (arr[i] > arr[i + 1])
                 {
                     arrayAccesses += 3;
-                    int temp = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = temp;
+                    arrHandlr.Swap(ref arr, i, i + 1);
                     isSorted = false;
                 }
             }
@@ -110,9 +111,7 @@ public class Algorithms
                 if (arr[i] > arr[swap])
                 {
                     arrayAccesses += 3;
-                    int temp = arr[i];
-                    arr[i] = arr[swap];
-                    arr[swap] = temp;
+                    arrHandlr.Swap(ref arr, i, swap);
                     isSorted = false;
                 }
             }
@@ -163,9 +162,7 @@ public class Algorithms
                     {
                         arrayAccesses += 3;
                         timesCompared++;
-                        int swap = arr[tempIndex];
-                        arr[tempIndex] = arr[tempIndex - 1];
-                        arr[tempIndex - 1] = swap;
+                        arrHandlr.Swap(ref arr, tempIndex, tempIndex - 1);
 
                         if (tempIndex == 1) break;
                         tempIndex--;
@@ -228,5 +225,67 @@ public class Algorithms
         };
 
         return sh;
+    }
+
+    public SortHistory? QuickSort(int[] arr)
+    {
+        long arrayAccesses = 0;
+        long timesCompared = 0;
+        bool wasCorrectlySorted = true;
+
+        DateTime timeStart = DateTime.Now;
+
+        QuickSortStart(arr, 0, arr.Length - 1, ref arrayAccesses, ref timesCompared);
+
+        DateTime timeStop = DateTime.Now;
+
+        wasCorrectlySorted = arrHandlr.CheckSorted(arr);
+
+        SortHistory sh = new()
+        {
+            AlgorithmId = 4,
+            SortStarted = timeStart,
+            SortEnded = timeStop,
+            ArraySize = arr.Length,
+            TimesCompared = timesCompared,
+            ArrayAccesses = arrayAccesses,
+            SortingAttempts = 1,
+            WasCorrectlySorted = wasCorrectlySorted
+        };
+
+        return sh;
+    }
+
+    public void QuickSortStart(int[] arr, int lo, int hi, ref long arrAccess, ref long compare)
+    {
+        if (lo < hi)
+        {
+            int pi = QuickSortPartition(arr, lo, hi, ref arrAccess, ref compare);
+
+            QuickSortStart(arr, lo, pi - 1, ref arrAccess, ref compare);
+            QuickSortStart(arr, pi + 1, hi, ref arrAccess, ref compare);
+        }
+    }
+
+    public int QuickSortPartition(int[] arr, int lo, int hi, ref long arrAccess, ref long compare)
+    {
+        int pivot = arr[hi];
+        arrAccess++;
+
+        int i = lo - 1;
+
+        for (int j = lo; j <= hi - 1; j++)
+        {
+            if (arr[j] < pivot)
+            {
+                compare++;
+                i++;
+                arrHandlr.Swap(ref arr, i, j);
+                arrAccess += 3;
+            }
+        }
+        arrHandlr.Swap(ref arr, i + 1, hi);
+        arrAccess += 3;
+        return i + 1;
     }
 }

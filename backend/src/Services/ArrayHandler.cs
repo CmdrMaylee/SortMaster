@@ -17,16 +17,11 @@ public class ArrayHandler
 
         for (int scrambles = 0; scrambles < 5; scrambles++)
         {
-
             for (int i = 0; i < arr.Length; i++)
             {
                 int randomIndex = randy.Next(arr.Length);
-
-                int temp = arr[i];
-                arr[i] = arr[randomIndex];
-                arr[randomIndex] = temp;
+                Swap(ref arr, i, randomIndex);
             }
-
         }
 
         return arr;
@@ -38,5 +33,12 @@ public class ArrayHandler
             if (arr[i] > arr[i + 1]) return false;
 
         return true;
+    }
+
+    public void Swap(ref int[] arr, int num1, int num2)
+    {
+        int temp = arr[num1];
+        arr[num1] = arr[num2];
+        arr[num2] = temp;
     }
 }
