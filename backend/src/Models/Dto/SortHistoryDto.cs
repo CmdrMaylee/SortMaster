@@ -6,8 +6,8 @@ public class SortHistoryDto
     public DateTime SortStarted { get; set; }
     public DateTime SortEnded { get; set; }
     public long ArraySize { get; set; }
-    public int TimesCompared { get; set; }
-    public int ArrayAccesses { get; set; }
+    public long TimesCompared { get; set; }
+    public long ArrayAccesses { get; set; }
     public long SortingAttempts { get; set; }
     public bool WasCancelled { get; set; } = false;
 
